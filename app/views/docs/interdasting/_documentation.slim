@@ -1,0 +1,3 @@
+.panel-group id="#{doc_id(doc)}_accordion"
+  - doc.controllers.each do |controller|
+      = render 'docs/interdasting/controller', controller: controller

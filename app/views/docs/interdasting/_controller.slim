@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      = link_to "#{controller.name}", "##{controller_id(controller)}", data: { toggle: 'collapse' }
+  .panel-collapse.collapse id="#{controller_id(controller)}"
+    .panel-body
+      .panel-group id="#{controller_id(controller)}_accordion"
+        - controller.actions.each do |action|
+          = render 'docs/interdasting/action', action: action

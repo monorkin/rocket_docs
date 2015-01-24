@@ -1,0 +1,37 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      = link_to "#{action.name}", "##{action_id(action)}", data: { toggle: 'collapse' }
+  .panel-collapse.collapse id="#{action_id(action)}"
+    .panel-body
+      ul.nav.nav-tabs
+        - action.methods.each_with_index do |method, index|
+          li class="#{index == 0 ? 'active' : ''}"
+            = link_to method.upcase, "##{method_id(action, method)}", data: { toggle: 'tab' }
+      .tab-content
+        - action.methods.each_with_index do |method, index|
+            .tab-pane class="#{index == 0 ? 'active' : ''}" id="#{method_id(action, method)}"
+              .col-md-6
+                .row
+                  .col-xs-12
+                    h4 URL
+                    / = action.url
+                  .col-xs-12
+                    - if action.description(method)
+                      h4 Description
+                      = simple_format(action.description(method))
+              .col-md-6
+                .row
+                  .col-xs-12
+                    - if action.params(method)
+                      h4 Params
+                      table.table.table-striped
+                        thead
+                          tr
+                            th Name
+                            th Type
+                        tbody
+                          - action.params(method).each do |k, v|
+                            tr
+                              td = k
+                              td = v

@@ -1,0 +1,7 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      = link_to "Version #{doc.version}", "##{doc_id(doc)}", data: { toggle: 'collapse' }
+  .panel-collapse.collapse id="#{doc_id(doc)}"
+    .panel-body
+      = render 'docs/interdasting/documentation', doc: doc
