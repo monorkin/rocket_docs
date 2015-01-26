@@ -30,7 +30,7 @@ If you are using [rocket_pants](https://github.com/Sutto/rocket_pants) you only 
 mount Interdasting::Engine => '/api-doc'
 ```
 
-The gem also adds a new rake task
+The gem also adds a new rake task for generating documentation as static html files 
 
 ```Ruby
 rake interdasting:generate[input_files, output_folder, version_name]
