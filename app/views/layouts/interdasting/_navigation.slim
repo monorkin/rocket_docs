@@ -1,9 +1,11 @@
-.navbar.navbar-default.navbar-fixed-top
-  .container-fluid
-    .navbar-header
-      = link_to 'Documentation', interdasting.root_path, class: 'navbar-brand'
-    .collapse.navbar-collapse
-      ul.nav.navbar-nav
-        li = link_to 'All versions', interdasting.root_path
-        - Interdasting::Router.versions.each do |v|
-          li = link_to v.to_s, interdasting.version_path(version: v)
+- interdasting ||= false
+- if interdasting
+  .navbar.navbar-default.navbar-fixed-top
+    .container-fluid
+      .navbar-header
+        = link_to 'Documentation', interdasting.root_path, class: 'navbar-brand'
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li = link_to 'All versions', interdasting.root_path
+          - Interdasting::Router.versions.each do |v|
+            li = link_to v.to_s, interdasting.version_path(version: v)

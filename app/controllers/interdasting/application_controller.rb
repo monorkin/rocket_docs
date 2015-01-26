@@ -6,7 +6,7 @@ module Interdasting
     end
 
     def show
-      @doc = Interdasting.version(params[:version])
+      @doc = Interdasting.documentation_for_version(params[:version])
       render 'docs/interdasting/show'
     end
   end

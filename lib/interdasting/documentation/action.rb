@@ -4,7 +4,6 @@ module Interdasting
       attr_reader :name
       attr_reader :controller
       attr_reader :comments
-      attr_reader :methods
 
       def initialize(name, comments, methods, controller)
         @name = name
@@ -28,6 +27,11 @@ module Interdasting
 
       def default_method
         methods.first || 'GET'
+      end
+
+      def methods
+        @methods.presence ||
+          @doc.keys.select { |m| Parser.http_keywords.include?(m) }
       end
 
       private

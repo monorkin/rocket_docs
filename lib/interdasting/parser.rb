@@ -20,6 +20,18 @@ module Interdasting
         indentation_parser.read(comments, {})
       end
 
+      def keywords
+        http_keywords + parser_keywords
+      end
+
+      def http_keywords
+        %w(GET POST PUT PATCH DELETE)
+      end
+
+      def parser_keywords
+        %w(DOC PARAMS)
+      end
+
       private
 
       def indentation_parser
@@ -55,10 +67,6 @@ module Interdasting
           parent[captures[1]] = captures[2]
           captures[2]
         end
-      end
-
-      def keywords
-        %w(GET POST PUT PATCH DELETE DOC PARAMS)
       end
 
       def extract_method_comment(line, comments = {}, temp_comment = [])

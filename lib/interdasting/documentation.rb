@@ -14,7 +14,6 @@ module Interdasting
     end
 
     def generate
-      Interdasting::Router.api_full
       build_controllers
       update
     end

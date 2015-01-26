@@ -1,6 +1,8 @@
 # About
 
-Interdasting is a automatic documentation generator for [rocket_pants](https://github.com/Sutto/rocket_pants) based APIs.
+Interdasting is a automatic documentation generator for APIs.
+
+It is intended to be used with  [rocket_pants](https://github.com/Sutto/rocket_pants) based APIs but it can also be used as a standalone generator through rake tasks.
 
 This project was mostly inspired by the [grape-swagger project](https://github.com/tim-vandecasteele/grape-swagger).
 
@@ -21,11 +23,17 @@ gem 'interdasting', github: 'stankec/interdasting'
 
 It will be released on [RubyGems](https://rubygems.org/) once better specs have been written and some missing features get implemented.
 
-After the gem is installed you only have to mount the engine in your routes file.
+If you are using [rocket_pants](https://github.com/Sutto/rocket_pants) you only have to mount the engine in your routes file.
 
 ```Ruby
 # In your config/routes.rb
 mount Interdasting::Engine => '/api-doc'
+```
+
+The gem also adds a new rake task
+
+```Ruby
+rake interdasting:generate[input_files, output_folder, version_name]
 ```
 
 # Configuration
@@ -37,7 +45,7 @@ It's important to note that only methods that are accessible (are used in the ro
 
 # Usage
 
-After you mount the engine in your routes file the only thing you have to do is write some comments in front of the method you want to document.
+If you are using [rocket_pants](https://github.com/Sutto/rocket_pants), after you mount the engine in your routes file the only thing you have to do is write some comments in front of the method you want to document.
 
 __Remeber indentation is important!__
 
@@ -118,19 +126,29 @@ def user_location
 end
 ```
 
-This would set the `DOC` and `PARAMS` values as default values for all methods except for `POST` which is the redifined.
+This would set the `DOC` and `PARAMS` values as default values for all methods except for `POST` which is the redefined.
 
 ### Examples
 
 Currently the best example you can look at is the `test_app` located in the `specs` folder. You can even start the app and experiment a little bit.
 
+### Rake task
+
+The rake task accepts two arguments. A list of file paths separated by spaces and an output folder. If no output folder is defined then it will default to `route_to_your_rails_app/public/system/documentation`
+
+Example:
+
+```Ruby
+rake interdasting:generate['app/controllers/api/v1/people_controller.rb app/controllers/api/v1/posts_controller.rb','public/system/api-docs', 'Legacy']
+```
+
 # Contributing
 
-If you feel like helping please feel free to fork this project and issue a pull request. There are many things that need to be done. Here's jus a few:
+If you feel like helping, feel free to fork this project and issue a pull request. There are many things that need to be done. Here's jus a few:
 
 1. Specs
-2. Caching
-3. Ability to make a API call from the GUI
+2. Ability to make a API call from the GUI
+3. Caching
 
 # License
 

@@ -1,4 +1,5 @@
-h1= @doc.version
+- doc ||= @doc
+h1= doc.version
 hr
 .col-xs-12
-  = render 'docs/interdasting/documentation', doc: @doc
+  = render 'docs/interdasting/documentation', doc: doc
