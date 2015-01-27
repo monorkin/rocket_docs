@@ -148,7 +148,7 @@ The rake tasks accept three arguments. A version name, a list of file paths sepa
 Example:
 
 ```Ruby
-rake interdasting:generate['Legacy', 'app/controllers/api/v1/people_controller.rb app/controllers/api/v1/posts_controller.rb','public/system/api-docs']
+rake interdasting:generate['Legacy','app/controllers/api/v1/people_controller.rb app/controllers/api/v2/posts_controller.rb','public/system/api-docs']
 ```
 This would generate a `Legacy.html` file in your `public/system/api-docs` folder and you could access it by going to `http://localhost:3000/system/api-docs/Legacy.html`
 
