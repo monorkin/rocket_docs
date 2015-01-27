@@ -1,0 +1,23 @@
+### <%= action.name %>
+
+<% action.methods.each do |method| %>
+#### <%= method.upcase %>
+
+> __URL:__ <%= '' || action.url %>
+
+<% if action.description(method) %>
+>__DESCRIPTION:__ <%= action.description(method) %>
+<% end %>
+
+<% if action.params(method) %>
+>__PARAMS:__
+
+>| Name | Type |
+>| ---- | ---- |
+<% action.params(method).each do |k, v| %>
+>| <%= k %> | <%= v %> |
+<% end %>
+<% end %>
+
+
+<% end %>

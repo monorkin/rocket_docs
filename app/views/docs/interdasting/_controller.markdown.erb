@@ -1,0 +1,7 @@
+## <%= controller.name %>
+
+<% controller.actions.each do |action| %>
+<%= render 'docs/interdasting/action.markdown.erb', action: action %>
+
+___
+<% end %>
