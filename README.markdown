@@ -114,7 +114,7 @@ def user_location
 end
 ```
 
-For the abouve example you could also write:
+For the above example you could also write:
 
 ```Ruby
 # Doc
@@ -135,7 +135,7 @@ def user_location
 end
 ```
 
-This would set the `DOC` and `PARAMS` values as default values for all methods except for `POST` which is the redefined.
+This would set the `DOC` and `PARAMS` values as default values for all methods except for `POST` which has it's own `DOC` and `PARAMS` values.
 
 ### Examples
 
