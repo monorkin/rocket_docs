@@ -1,6 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe Interdasting::Router do
+  describe '#api_full' do
+    it 'returns a hash' do
+      expect(Interdasting::Router.api_full).to be_a(Hash)
+    end
+
+    context 'contains all' do
+      it 'versions' do
+      end
+
+      it 'controllers for every version' do
+      end
+
+      it 'actions for every controller' do
+      end
+
+      it 'methods for every action for every controller' do
+      end
+    end
+  end
+
   describe '#api_controller_names' do
     it 'returns all api controller names' do
       expected_result = [
