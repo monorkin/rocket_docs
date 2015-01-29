@@ -4,7 +4,7 @@ module Interdasting
       def api_full
         result = {}
         versions.each { |v| result[v] = {} }
-        result.each { |k, v| fill_controller_hash_for_version(k, v) }
+        result.each { |k, v| fill_controllers_hash_for_version(k, v) }
         result
       end
 
@@ -47,15 +47,39 @@ module Interdasting
 
       private
 
-      def fill_controller_hash_for_version(version, hash)
+      def fill_controllers_hash_for_version(version, hash)
         routes = routes_for_version(version)
         routes.each do |r|
-          cn = r.defaults[:controller]
-          ch = hash[cn] ||= { actions: {} }
-          ch[:path] ||= api_controller_paths(api_controllers([cn])).first
-          ch[:actions][r.defaults[:action]] ||= []
-          ch[:actions][r.defaults[:action]] << r.constraints[:request_method]
+          route_controller(hash, r)
         end
+      end
+
+      def route_controller(ch, r)
+        cn = r.defaults[:controller]
+        ch[cn] ||= {}
+        ch[cn][:path] ||= api_controller_paths(api_controllers([cn])).first
+        ch[cn][:actions] ||= {}
+        route_action(ch[cn][:actions], r)
+      end
+
+      def route_action(hash, r)
+        ah = hash[r.defaults[:action]] ||= {}
+        ah[:params] = route_params(r)
+        route_methods(ah, r)
+      end
+
+      def route_params(r)
+        Hash[
+          r.required_parts.map do |name|
+            type = r.constraints[name.to_sym] || '???'
+            [name, type]
+          end
+        ]
+      end
+
+      def route_methods(hash, r)
+        hash[:methods] ||= []
+        hash[:methods] << r.constraints[:request_method]
       end
     end
   end

@@ -14,8 +14,9 @@
               .col-md-6
                 .row
                   .col-xs-12
-                    h4 URL
-                    / = action.url
+                    - if action.url(method)
+                      h4 URL
+                      = action.url
                   .col-xs-12
                     - if action.description(method)
                       h4 Description

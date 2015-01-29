@@ -9,6 +9,7 @@ module Api
       #
       def index
         puts 'Oh really?' if (true != false) # inline coments should be ignored
+        render json: params
       end
 
       # Doc
@@ -22,7 +23,13 @@ module Api
       def show
         # Let's see if this will get picked up by the parser
         puts 'I am blind!!!'
+        render json: params
       end
+
+      def new
+        render json: params
+      end
+
       #
       # Doc
       #   Praesent maximus, leo a maximus fringilla, urna felis sollicitudin
@@ -47,6 +54,13 @@ module Api
         sleep 1
         puts '* Cutting ruby'
         puts 'Done!'
+        render json: params
+      end
+
+      # Url
+      #   /api/v1/person/:test_id
+      def edit
+        render json: params
       end
 
       # PUT
@@ -68,6 +82,7 @@ module Api
 
       def update
         puts 'Why would you waont to change things?'
+        render json: params
       end
 
       # Something complete unrelated to the toppic of documentation generation
@@ -75,6 +90,7 @@ module Api
       # hopefully... You newer know what those parsers are going to do...
       def destroy
         puts 'Bang! Bang! You shoot me down. Bang! Bang! I hit the ground...'
+        render json: params
       end
     end
   end

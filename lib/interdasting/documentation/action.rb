@@ -5,16 +5,20 @@ module Interdasting
       attr_reader :controller
       attr_reader :comments
 
-      def initialize(name, comments, methods, controller)
+      def initialize(name, comments, methods, params, controller)
         @name = name
         @comments = comments
         @methods = sanitize_methods(methods)
+        @params  = params
+        @params.delete(:version) if params
+        @params = @params.presence
         @controller = controller
         generate
       end
 
-      def url
-        _routes.url_for(controller: controller.name.downcase, action: name)
+      def url(method = default_method)
+        (@doc[method] && @doc[method]['URL']) || @doc['URL'] ||
+          router_url(method)
       end
 
       def description(method = default_method)
@@ -22,7 +26,8 @@ module Interdasting
       end
 
       def params(method = default_method)
-        (@doc[method] && @doc[method]['PARAMS']) || @doc['PARAMS']
+        (@doc[method] && @doc[method]['PARAMS']) || @doc['PARAMS'] ||
+          @params
       end
 
       def default_method
@@ -54,6 +59,26 @@ module Interdasting
             m.to_s.sub('(?-mix:^', '').sub('$)', '').split('|')
           end
         end.flatten
+      end
+
+      def router_url(method = default_method)
+        route = _routes.url_for(url_params(method))
+        # askjsadhkadsh if method.downcase == 'post'
+        route = route.split('?').first unless method == 'GET'
+        CGI.unescape(route)
+      rescue ActionController::UrlGenerationError
+        nil
+      end
+
+      def url_params(method = default_method)
+        return {} unless @params
+        hash = Hash[params(method).map { |k, _v| [k.to_sym, "{#{k}}"] }]
+        hash.merge(
+          controller: controller.full_name.downcase,
+          action: name,
+          version: controller.documentation.version,
+          only_path: true
+        )
       end
     end
   end

@@ -7,7 +7,6 @@ PATH
       indentation-parser (~> 1.0.3)
       jquery-rails
       rails (~> 4.1.8)
-      rocket_pants
       rspec-rails
       sass-rails (>= 3.2)
       slim-rails
@@ -179,4 +178,5 @@ DEPENDENCIES
   interdasting!
   pry
   pry-rails
+  rocket_pants
   sqlite3

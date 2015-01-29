@@ -29,15 +29,22 @@ module Interdasting
       end
 
       def parser_keywords
-        %w(DOC PARAMS)
+        string_keywords + hash_keywords
       end
 
       private
 
+      def string_keywords
+        %w(DOC URL)
+      end
+
+      def hash_keywords
+        %w(PARAMS)
+      end
+
       def indentation_parser
         IndentationParser.new do |p|
           indentation_parser_default(p)
-          indentation_parser_hashes(p)
           indentation_parser_leafs(p)
         end
       end
@@ -48,7 +55,7 @@ module Interdasting
           words = source.split
           keyword = words.first.upcase
           if words.count == 1 && keywords.include?(keyword)
-            node = keyword == 'DOC' ? '' : {}
+            node = string_keywords.include?(keyword) ? '' : {}
           end
           parent[keyword] = node
           node
@@ -57,15 +64,13 @@ module Interdasting
 
       def indentation_parser_leafs(p)
         p.on_leaf do |parent, source|
-          parent << source.strip if parent.is_a?(String)
-        end
-      end
-
-      def indentation_parser_hashes(p)
-        p.on(/([^ ]+)[ ]*:[ ]*(.+)/) do |parent, _source, captures|
-          parent ||= {}
-          parent[captures[1]] = captures[2]
-          captures[2]
+          case parent
+          when String
+            parent << source.strip
+          when Hash
+            k, v = source.split(':', 2)
+            parent[k] = v
+          end
         end
       end
 

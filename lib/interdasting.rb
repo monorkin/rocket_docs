@@ -1,5 +1,5 @@
-require 'slim'
 require 'pry'
+require 'slim'
 require 'indentation-parser'
 require 'interdasting/engine'
 require 'interdasting/router'

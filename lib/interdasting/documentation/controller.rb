@@ -44,8 +44,8 @@ module Interdasting
       def generate
         @actions = []
         comments = Interdasting::Parser.method_comments(file)
-        @actions_in.each do |name, methods|
-          @actions << Action.new(name, comments[name], methods, self)
+        @actions_in.each do |name, action|
+          @actions << Action.new(name, comments[name], action[:methods], action[:params], self)
         end
       end
 
