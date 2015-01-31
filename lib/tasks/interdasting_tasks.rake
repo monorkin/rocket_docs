@@ -25,7 +25,7 @@ namespace :interdasting do
       file.puts(html)
     end
   end
-  task gen: :generate
+  task :gen, generator_args => :generate
 
   desc 'Generates static MARKDOWN documentation files'
   md_generator_args = generator_args
@@ -47,8 +47,8 @@ namespace :interdasting do
       file.puts(html)
     end
   end
-  task generate_md: :generate_markdown
-  task gen_md: :generate_markdown
+  task :generate_md, md_generator_args => :generate_markdown
+  task :gen_md, md_generator_args => :generate_markdown
 
   ###############
   ### HELPERS ###
