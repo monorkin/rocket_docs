@@ -35,12 +35,14 @@ The gem also adds two new rake tasks for generating documentation as static html
 ```Ruby
 # For HTML files
 rake interdasting:generate[version_name, input_files, output_folder]
+# Alias
 rake interdasting:gen[version_name, input_files, output_folder]
 ```
 
 ```Ruby
 # For MARKDOWN files
 rake interdasting:generate_markdown[version_name, input_files, output_folde]
+# Aliases
 rake interdasting:generate_md[version_name, input_files, output_folde]
 rake interdasting:gen_md[version_name, input_files, output_folde]
 ```
