@@ -61,7 +61,7 @@ __Remeber indentation is important!__
 
 ### Keywords
 
-There are a few keywords to help you: `DOC`, `PARAMS`, `GET`, `PUT`, `POST`, `PATCH`, `DELETE`
+There are a few keywords to help you: `DOC`, `PARAMS`, `URL`, `GET`, `PUT`, `POST`, `PATCH`, `DELETE`
 
 It doesn't matter if the words are lower or upper case.
 
@@ -84,6 +84,22 @@ end
 # Doc
 #   This action displays a single post
 #
+# Params
+#   id: integer (the post's identifier)
+#
+
+def show
+  ...
+end
+```
+
+`URL` is used to define an action's URL.
+
+```Ruby
+# Doc
+#   This action displays a single post
+# URL
+#   /post/{id}
 # Params
 #   id: integer (the post's identifier)
 #
