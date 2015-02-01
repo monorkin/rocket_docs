@@ -11,6 +11,7 @@
       .tab-content
         - action.methods.each_with_index do |method, index|
             .tab-pane class="#{index == 0 ? 'active' : ''}" id="#{method_id(action, method)}"
+
               .col-md-6
                 .row
                   .col-xs-12
@@ -36,3 +37,10 @@
                             tr
                               td = k
                               td = v
+
+              - if action.url(method)
+                .col-xs-12
+                  hr
+                  = link_to '', class: 'btn btn-primary try-out', data: { method: method, params: action.params(method), url: action.url } do
+                    span.glyphicon.glyphicon-new-window
+                    |  Try it out

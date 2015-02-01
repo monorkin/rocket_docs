@@ -71,8 +71,10 @@ module Interdasting
       end
 
       def url_params(method = default_method)
-        return {} unless @params
-        hash = Hash[params(method).map { |k, _v| [k.to_sym, "{#{k}}"] }]
+        hash = {}
+        if @params
+          hash = Hash[params(method).map { |k, _v| [k.to_sym, "{#{k}}"] }]
+        end
         hash.merge(
           controller: controller.full_name.downcase,
           action: name,
