@@ -2,9 +2,9 @@
 
 Interdasting is a automatic documentation generator for APIs.
 
-It is intended to be used with  [rocket_pants](https://github.com/Sutto/rocket_pants) based APIs but it can also be used as a standalone generator through rake tasks.
+It is intended to be used with :rocket: [rocket_pants](https://github.com/Sutto/rocket_pants) based APIs but it can also be used as a standalone generator through rake tasks.
 
-This project was mostly inspired by the [grape-swagger project](https://github.com/tim-vandecasteele/grape-swagger).
+This project was mostly inspired by the :grapes: [grape-swagger project](https://github.com/tim-vandecasteele/grape-swagger).
 
 All documentation is done in comments so that your code doesn't get littered with code that has no functional purpose, thus making your code more readable.
 
@@ -21,7 +21,7 @@ Currently, you can only install this gem via GitHub.
 gem 'interdasting', github: 'stankec/interdasting'
 ```
 
-It will be released on [RubyGems](https://rubygems.org/) once better specs have been written and some missing features get implemented.
+It will be released on :gem: [RubyGems](https://rubygems.org/) once better specs have been written and some missing features get implemented.
 
 If you are using [rocket_pants](https://github.com/Sutto/rocket_pants) you only have to mount the engine in your routes file.
 
@@ -81,7 +81,9 @@ end
 ```
 
 `PARAMS` is used to define which parameters the action accepts.
+If you are using rocket_pants this will be automatically populated.
 
+Example:
 ```Ruby
 # Doc
 #   This action displays a single post
@@ -96,7 +98,9 @@ end
 ```
 
 `URL` is used to define an action's URL.
+If you are using rocket_pants this will be automatically populated.
 
+Example:
 ```Ruby
 # Doc
 #   This action displays a single post
