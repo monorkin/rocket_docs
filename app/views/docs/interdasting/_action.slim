@@ -41,6 +41,6 @@
               - if action.url(method)
                 .col-xs-12
                   hr
-                  = link_to '', class: 'btn btn-primary try-out', data: { method: method, params: action.params(method), url: action.url } do
+                  = link_to '#', class: 'btn btn-primary try-out', data: { request_method: method, params: action.params(method), url: action.url, toggle: 'modal', target: '#try-out-modal' } do
                     span.glyphicon.glyphicon-new-window
                     |  Try it out

@@ -63,7 +63,6 @@ module Interdasting
 
       def router_url(method = default_method)
         route = _routes.url_for(url_params(method))
-        # askjsadhkadsh if method.downcase == 'post'
         route = route.split('?').first unless method == 'GET'
         CGI.unescape(route)
       rescue ActionController::UrlGenerationError
