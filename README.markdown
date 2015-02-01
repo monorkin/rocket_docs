@@ -157,7 +157,7 @@ def user_location
 end
 ```
 
-This would set the `DOC` and `PARAMS` values as default values for all methods except for `POST` which has it's own `DOC` and `PARAMS` values.
+This would set the `DOC`, `PARAMS` and `URL` values as default values for all methods except for `POST` which has it's own `DOC` and `PARAMS` values.
 
 ### Examples
 
@@ -173,6 +173,42 @@ Example:
 rake interdasting:generate['Legacy','app/controllers/api/v1/people_controller.rb app/controllers/api/v2/posts_controller.rb','public/system/api-docs']
 ```
 This would generate a `Legacy.html` file in your `public/system/api-docs` folder and you could access it by going to `http://localhost:3000/system/api-docs/Legacy.html`
+
+### Difference between the engine and the rake tasks
+
+There is a difference between using the rake tasks and the engine.
+
+When using the engine in combination with rocketpants there is no need to define to which methods the action responds to and what it's URL is. So if you have an action that responds to both `GET` and `POST` requests you only have to write the following and it would automatically detect to which methods the action responds and what it's URL is.
+
+```Ruby
+# Doc
+#   This action returns a users current location
+# Params
+#   id: integer (the user's identifier)
+
+def user_location
+  ...
+end
+```
+
+But the rake tasks are not able to determine the URL and to which methods an action responds so they have to be explicitly specified! To get the same result as in the above example you would have to write:
+
+```Ruby
+# URL
+#   /users/location?id={id}
+# Doc
+#   This action returns a users current location
+# Params
+#   id: integer (the user's identifier)
+# GET
+# POST
+
+def user_location
+  ...
+end
+```
+
+_Note: If no new value was defined in a method specific block then the default will be used_
 
 # Contributing
 
