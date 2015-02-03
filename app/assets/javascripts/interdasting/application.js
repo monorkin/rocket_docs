@@ -47,8 +47,13 @@ $(document).ready(function () {
       data = $requestBody.val();
     } else if ($inputs.length !== 0) {
       data = {}
-      $inputs.each(function($input) {
-        data[$input.data('key')] = $input.val();
+      $inputs.each(function(i, $input) {
+        $input = $($input);
+        if (url.indexOf('{' + $input.data('key') + '}')) {
+          url = url.replace('{' + $input.data('key') + '}', $input.val())
+        } else {
+          data[$input.data('key')] = $input.val();
+        }
       });
     }
 

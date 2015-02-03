@@ -26,10 +26,10 @@ module Api
         # Let's see if this will get picked up by the parser
         puts 'I am blind!!!'
         exposes Hash[(0...10).to_a.map do |i|
-          k = (65 + rand(26)).chr }.join
-          v = (65 + rand(26)).chr }.join
+          k = (0...8).map { (65 + rand(26)).chr }.join
+          v = (0...8).map { (65 + rand(26)).chr }.join.downcase
           [k, v]
-        end]
+        end].merge(id: params[:id])
       end
 
       def new
