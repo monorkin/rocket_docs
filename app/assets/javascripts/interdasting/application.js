@@ -20,6 +20,7 @@ $(document).ready(function () {
       )
     );
     $testButton.click(function(){
+      saveParams($modal.find('.modal-body'), $triggerButton);
       var $response = $modal.find('.response')
       $modal.find('.response-body').removeClass('hidden');
       addSpinner($response);
@@ -42,10 +43,7 @@ $(document).ready(function () {
     var data = null;
     var processData = true;
 
-    if ($requestBody.length !== 0) {
-      processData = false;
-      data = $requestBody.val();
-    } else if ($inputs.length !== 0) {
+    if ($inputs.length !== 0) {
       data = {}
       $inputs.each(function(i, $input) {
         $input = $($input);
@@ -56,6 +54,10 @@ $(document).ready(function () {
         }
       });
     }
+    if ($requestBody.length !== 0) {
+      processData = false;
+      data = $requestBody.val();
+    }
 
     return {
       url: url,
@@ -63,6 +65,26 @@ $(document).ready(function () {
       data: data,
       processData: processData
     }
+  }
+
+  function saveParams($object, $saveToObject) {
+    var $inputs = $object.find('input[data-key]');
+    var $requestBody = $object.find('textarea');
+
+    if ($inputs.length !== 0) {
+      params = {};
+      $inputs.each(function(i, $input) {
+        $input = $($input);
+        params[$input.data('key')] = $input.val();
+      });
+      $saveToObject.data('saved_params', params);
+    }
+
+    if ($requestBody.length !== 0) {
+      $saveToObject.data('saved_text', $requestBody.val());
+    }
+
+    return true;
   }
 
   function addSpinner($object) {
@@ -77,45 +99,22 @@ $(document).ready(function () {
     var content = ''
     content += '<h3>Request body</h3>'
     if (method === 'GET' && params) {
-      content += '<table class="table table-striped">';
-      content += '<thead>';
-      content += '<tr>'+
-                   '<th>Param</th>'+
-                   '<th>Value</th>'+
-                 '</tr>';
-      content += '</thead>';
-      $.each(params, function(k, _v) {
-        var saved = '';
-        if (savedParams) saved = savedParams[key];
-        content += '<tr>'+
-                     '<td>' + k + '</td>'+
-                     '<td><input type="text" class="form-control" value="' + saved + '" data-key="' + k + '"></td>'+
-                   '</tr>';
-      });
-      content += '</table>';
+      content += paramsInputTable(params, savedParams)
     } else {
+      var regex = /\{[^\s]+\}/;
+      var match = regex.exec(url);
+      if (match && match.length !== 0) {
+        tempParams = {}
+        $.each(match, function(i, m){ tempParams[m.replace(/[\{\}]/g,'')] = i });
+        content += paramsInputTable(tempParams, savedParams)
+      }
       var saved = ''
       if (savedText) saved = savedText;
       content += '<textarea class="form-control" rows="6" cols="90">' + saved + '</textarea>';
     }
     if (method !== 'GET' && params) {
       content += '<h4>Expected params</h4>'
-      content += '<table class="table table-striped">';
-      content += '<thead>';
-      content += '<tr>'+
-                   '<th>Name</th>'+
-                   '<th>Type</th>'+
-                 '</tr>';
-      content += '</thead>';
-      $.each(params, function(k, v) {
-        var saved = '';
-        if (savedParams) saved = savedParams[key];
-        content += '<tr>'+
-                     '<td>' + k + '</td>'+
-                     '<td>' + v + '</td>'+
-                   '</tr>';
-      });
-      content += '</table>';
+      content += paramsTable(params)
     }
     content += '<div class="response-body hidden">'
     content += '<hr>';
@@ -124,5 +123,43 @@ $(document).ready(function () {
     content += '</div>'
 
     return content;
+  }
+
+  function paramsInputTable(params, savedParams) {
+    content  = '<table class="table table-striped">';
+    content += '<thead>';
+    content += '<tr>'+
+                 '<th>Param</th>'+
+                 '<th>Value</th>'+
+               '</tr>';
+    content += '</thead>';
+    $.each(params, function(k, _v) {
+      var saved = '';
+      if (savedParams && savedParams[k]) saved = savedParams[k];
+      content += '<tr>'+
+                   '<td>' + k + '</td>'+
+                   '<td><input type="text" class="form-control" value="' + saved + '" data-key="' + k + '"></td>'+
+                 '</tr>';
+    });
+    content += '</table>';
+    return content
+  }
+
+  function paramsTable(params) {
+    content  = '<table class="table table-striped">';
+    content += '<thead>';
+    content += '<tr>'+
+                 '<th>Name</th>'+
+                 '<th>Type</th>'+
+               '</tr>';
+    content += '</thead>';
+    $.each(params, function(k, v) {
+      content += '<tr>'+
+                   '<td>' + k + '</td>'+
+                   '<td>' + v + '</td>'+
+                 '</tr>';
+    });
+    content += '</table>';
+    return content
   }
 });

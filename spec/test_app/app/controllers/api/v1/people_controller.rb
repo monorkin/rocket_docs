@@ -10,7 +10,8 @@ module Api
       def index
         puts 'Oh really?' if (true != false) # inline coments should be ignored
         exposes (0...1500).to_a.map do |i|
-          { name: (0...8).map { (65 + rand(26)).chr }.join }
+          fake_name = (0...8).map { (65 + rand(26)).chr }.join
+          { name: fake_name }
         end
       end
 
@@ -25,15 +26,16 @@ module Api
       def show
         # Let's see if this will get picked up by the parser
         puts 'I am blind!!!'
-        exposes Hash[(0...10).to_a.map do |i|
+        fake_object = (0...10).to_a.map do |i|
           k = (0...8).map { (65 + rand(26)).chr }.join
           v = (0...8).map { (65 + rand(26)).chr }.join.downcase
           [k, v]
-        end].merge(id: params[:id])
+        end
+        exposes Hash[fake_object].merge(id: params[:id])
       end
 
       def new
-        render json: params
+        exposes {}
       end
 
       #
@@ -52,21 +54,13 @@ module Api
 
       def create
         puts 'Assembling...'
-        puts '* Pouring hot coco'
-        sleep 1
-        puts '* Inventing stupid loading text'
-        sleep 1
-        puts '* Actually going to work'
-        sleep 1
-        puts '* Cutting ruby'
-        puts 'Done!'
-        render json: params
+        exposes {}
       end
 
       # Url
-      #   /api/v1/person/:test_id
+      #   /api/v1/person/{test_id}
       def edit
-        render json: params
+        exposes(test_id: params[:test_id])
       end
 
       # PUT
@@ -88,7 +82,7 @@ module Api
 
       def update
         puts 'Why would you waont to change things?'
-        render json: params
+        exposes params
       end
 
       # Something complete unrelated to the toppic of documentation generation
@@ -96,7 +90,7 @@ module Api
       # hopefully... You newer know what those parsers are going to do...
       def destroy
         puts 'Bang! Bang! You shoot me down. Bang! Bang! I hit the ground...'
-        render json: params
+        exposes params
       end
     end
   end
