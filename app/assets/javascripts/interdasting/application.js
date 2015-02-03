@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require interdasting/prettify/prettify
 
 $(document).ready(function () {
   $('#try-out-modal').on('show.bs.modal', function (event) {
@@ -21,31 +20,52 @@ $(document).ready(function () {
       )
     );
     $testButton.click(function(){
-      var $response = $modal.find('pre.response')
+      var $response = $modal.find('.response')
       $modal.find('.response-body').removeClass('hidden');
       addSpinner($response);
+      $.ajax(
+        buildRequestParams($modal.find('.modal-body'), $triggerButton.data('url'), $triggerButton.data('request-method'))
+      ).done(function(data, textStatus, jqXHR) {
+        $response.html('');
+        $response.text(jqXHR.responseText);
+      });
     });
-      prettyPrint();
   }).on('hidden.bs.modal', function (e) {
     var $modal = $(this);
     $modal.find('h4.modal-title').text('Try it');
     $modal.find('.modal-body').html('');
   })
 
+  function buildRequestParams($object, url, method) {
+    var $inputs = $object.find('input[data-key]');
+    var $requestBody = $object.find('textarea');
+    var data = null;
+    var processData = true;
+
+    if ($requestBody.length !== 0) {
+      processData = false;
+      data = $requestBody.val();
+    } else if ($inputs.length !== 0) {
+      data = {}
+      $inputs.each(function($input) {
+        data[$input.data('key')] = $input.val();
+      });
+    }
+
+    return {
+      url: url,
+      type: method,
+      data: data,
+      processData: processData
+    }
+  }
+
   function addSpinner($object) {
       var message = '<center>'+
                       '<span class="glyphicon glyphicon-refresh gly-spin"></span>'+
                       '  Waiting for response...'+
                     '</center>';
-      var longMessage = '<center>'+
-                          '<span class="glyphicon glyphicon-refresh gly-spin"></span>'+
-                          '  Ok... This is taking too long!'+
-                        '</center>';
-      $object.removeClass('prettyprinted');
       $object.html(message);
-      setTimeout(function(){
-        if ($object.html() === message) $object.html(longMessage);
-        }, 2000);
   }
 
   function contentForModal(url, method, params, savedParams, savedText) {
@@ -95,7 +115,7 @@ $(document).ready(function () {
     content += '<div class="response-body hidden">'
     content += '<hr>';
     content += '<h3>Response</h3>'
-    content += '<pre class="response prettyprint"></pre>'
+    content += '<pre><code class="response"></code></pre>'
     content += '</div>'
 
     return content;

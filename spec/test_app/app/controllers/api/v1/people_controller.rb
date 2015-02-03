@@ -9,7 +9,9 @@ module Api
       #
       def index
         puts 'Oh really?' if (true != false) # inline coments should be ignored
-        render json: params
+        exposes (0...1500).to_a.map do |i|
+          { name: (0...8).map { (65 + rand(26)).chr }.join }
+        end
       end
 
       # Doc
@@ -23,7 +25,11 @@ module Api
       def show
         # Let's see if this will get picked up by the parser
         puts 'I am blind!!!'
-        render json: params
+        exposes Hash[(0...10).to_a.map do |i|
+          k = (65 + rand(26)).chr }.join
+          v = (65 + rand(26)).chr }.join
+          [k, v]
+        end]
       end
 
       def new
