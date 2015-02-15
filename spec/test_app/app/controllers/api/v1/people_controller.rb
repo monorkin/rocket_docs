@@ -9,7 +9,7 @@ module Api
       #
       def index
         puts 'Oh really?' if (true != false) # inline coments should be ignored
-        exposes (0...1500).to_a.map do |i|
+        exposes (0...1500).to_a.map do |_i|
           fake_name = (0...8).map { (65 + rand(26)).chr }.join
           { name: fake_name }
         end

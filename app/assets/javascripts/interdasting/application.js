@@ -27,8 +27,10 @@ $(document).ready(function () {
       $.ajax(
         buildRequestParams($modal.find('.modal-body'), $triggerButton.data('url'), $triggerButton.data('request-method'))
       ).done(function(data, textStatus, jqXHR) {
+        response = jqXHR.responseText
         $response.html('');
-        $response.text(jqXHR.responseText);
+        $response.text(response);
+        $(window).trigger('resize');
       });
     });
   }).on('hidden.bs.modal', function (e) {
@@ -62,8 +64,8 @@ $(document).ready(function () {
     return {
       url: url,
       type: method,
-      data: data,
-      processData: processData
+      processData: processData,
+      data: data
     }
   }
 
@@ -161,5 +163,10 @@ $(document).ready(function () {
     });
     content += '</table>';
     return content
+  }
+
+  function indentResponse(response) {
+    // TODO: code to indent the response depending on if it's a JSON or XML response
+    return response;
   }
 });
