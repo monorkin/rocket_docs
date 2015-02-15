@@ -13,15 +13,6 @@ module Interdasting
       generate
     end
 
-    def generate
-      build_controllers
-      update
-    end
-
-    def methods
-      controllers.map(&:methods).flatten
-    end
-
     def should_update?
       should_update = false
       controllers.each { |c| should_update ||= c.should_update? }
@@ -39,6 +30,11 @@ module Interdasting
     end
 
     private
+
+    def generate
+      build_controllers
+      update
+    end
 
     def build_controllers
       @controllers = []

@@ -67,10 +67,10 @@ module Interdasting
           case parent
           when String
             parent << ' ' if parent.length != 0
-            parent << source.strip
+            parent << source.try(:strip) || ''
           when Hash
             k, v = source.split(':', 2)
-            parent[k] = v.strip
+            parent[k] = v.try(:strip)
           end
         end
       end
