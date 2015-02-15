@@ -66,10 +66,11 @@ module Interdasting
         p.on_leaf do |parent, source|
           case parent
           when String
+            parent << ' ' if parent.length != 0
             parent << source.strip
           when Hash
             k, v = source.split(':', 2)
-            parent[k] = v
+            parent[k] = v.strip
           end
         end
       end

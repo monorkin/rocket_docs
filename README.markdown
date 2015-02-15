@@ -97,8 +97,7 @@ def show
 end
 ```
 
-`URL` is used to define an action's URL.
-If you are using rocket_pants this will be automatically populated.
+`URL` is used to define an action's URL. Parameters should be surounded by curly braces. If you are using rocket_pants this will be automatically populated.
 
 Example:
 ```Ruby
@@ -215,8 +214,7 @@ _Note: If no new value was defined in a method specific block then the default w
 If you feel like helping, feel free to fork this project and issue a pull request. There are many things that need to be done. Here's jus a few:
 
 1. Specs
-2. Ability to make a API call from the GUI
-3. Caching
+2. Caching
 
 # License
 

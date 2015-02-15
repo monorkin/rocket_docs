@@ -18,6 +18,9 @@ Doc
 Params
   id: integer
 EOF
+  expected_new_comments = <<-EOF
+
+EOF
   expected_create_comments = <<-EOF
 Doc
   Praesent maximus, leo a maximus fringilla, urna felis sollicitudin
@@ -28,26 +31,30 @@ GET
     id: integer
 POST
   Params
-      id: integer
-     age: integer
+    id:   integer
+    age:  integer
     name: string
 EOF
+  expected_edit_comments = <<-EOF
+Url
+  /api/v1/person/{test_id}
+EOF
   expected_update_comments = <<-EOF
-GET
+PUT
   Doc
     Praesent maximus, leo a maximus fringilla, urna felis sollicitudin
     nunc, eu pulvinar est urna eu justo. Phasellus quis hendrerit nibh.
     Praesent id nunc ac augue ultricies rutrum at vel quam.
   Params
     id: integer
-POST
+PATCH
   Doc
     Phasellus ac diam sit amet elit cursus tincidunt. Donec vel
     tincidunt orci. Maecenas in feugiat tortor. Lorem ipsum dolor sit
     amet, consectetur adipiscing elit.
   Params
-      id: integer
-     age: integer
+    id:   integer
+    age:  integer
     name: string
 EOF
   expected_destroy_comments = <<-EOF
@@ -57,13 +64,15 @@ hopefully... You newer know what those parsers are going to do...
 EOF
 
   describe '#method_comments' do
-    it 'returns a hash of methodnames with their comments' do
+    it 'returns a hash of method names with their comments' do
       file_path = Interdasting::Router.api_controller_paths.first
       comments = Interdasting::Parser.method_comments(file_path)
       expected_comments = {
         'index'   => expected_index_comments,
         'show'    => expected_show_comments,
+        'new'     => expected_new_comments,
         'create'  => expected_create_comments,
+        'edit'    => expected_edit_comments,
         'update'  => expected_update_comments,
         'destroy' => expected_destroy_comments
       }
@@ -72,12 +81,39 @@ EOF
     end
   end
 
-  describe '#method_comments' do
-    it 'returns a hash of methodnames with their comments' do
+  describe '#comments_for_method' do
+    it 'returns the comments before a method' do
       file_path = Interdasting::Router.api_controller_paths.first
       comments = Interdasting::Parser.comments_for_method('index', file_path)
       expect(comments).to be_a String
       expect(comments).to eq expected_index_comments
+    end
+  end
+
+  describe '#parse_comments' do
+    it 'returns a hash containing the values of the comments' do
+      comments = Interdasting::Parser.parse_comments(expected_create_comments)
+      expect(comments).to be_a IndentationParser::RootNode
+      comments = comments.value
+      expect(comments).to be_a Hash
+      expect(comments).to eq(
+        'DOC' => 'Praesent maximus, leo a maximus fringilla, urna felis '\
+                 'sollicitudin nunc, eu pulvinar est urna eu justo. Phasellus '\
+                 'quis hendrerit nibh. Praesent id nunc ac augue ultricies '\
+                 'rutrum at vel quam.',
+        'GET' => {
+          'PARAMS' => {
+            'id' => 'integer'
+          }
+        },
+        'POST' => {
+          'PARAMS' => {
+            'id' => 'integer',
+            'age' => 'integer',
+            'name' => 'string'
+          }
+        }
+      )
     end
   end
 end

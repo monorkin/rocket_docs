@@ -26,7 +26,7 @@ module Api
       def show
         # Let's see if this will get picked up by the parser
         puts 'I am blind!!!'
-        fake_object = (0...10).to_a.map do |i|
+        fake_object = (0...10).to_a.map do |_i|
           k = (0...8).map { (65 + rand(26)).chr }.join
           v = (0...8).map { (65 + rand(26)).chr }.join.downcase
           [k, v]
