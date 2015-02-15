@@ -213,7 +213,7 @@ _Note: If no new value was defined in a method specific block then the default w
 
 If you feel like helping, feel free to fork this project and issue a pull request. There are many things that need to be done. Here's jus a few:
 
-1. Specs
+1. Better specs
 2. Caching
 
 # License
