@@ -33,10 +33,7 @@
                             th Name
                             th Type
                         tbody
-                          - action.params(method).each do |k, v|
-                            tr
-                              td = k
-                              td = v
+                          = render 'docs/interdasting/hash_param', hash: action.params(method), wrap: nil
 
               - if action.url(method)
                 .col-xs-12

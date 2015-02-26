@@ -71,15 +71,26 @@ module Interdasting
 
       def url_params(method = default_method)
         hash = {}
-        if @params
-          hash = Hash[params(method).map { |k, _v| [k.to_sym, "{#{k}}"] }]
-        end
+        hash = deflated_url_params(params(method)) if @params
         hash.merge(
           controller: controller.full_name.downcase,
           action: name,
           version: controller.documentation.version,
           only_path: true
         )
+      end
+
+      def deflated_url_params(hash, wrapper = nil)
+        nh = {}
+        hash.each do |k, v|
+          new_v = wrapper ? "#{wrapper}[#{k}]" : k
+          if v.is_a?(Hash)
+            nh[k] = deflated_url_params(v, k)
+          else
+            nh[k] = "{#{new_v}}"
+          end
+        end
+        nh.symbolize_keys
       end
     end
   end

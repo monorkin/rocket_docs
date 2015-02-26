@@ -53,12 +53,12 @@ module Interdasting
         p.default do |parent, source|
           parent ||= {}
           words = source.split
-          keyword = words.first.upcase
+          keyword, key = words.first.upcase, words.first
           if words.count == 1 && keywords.include?(keyword)
-            node = string_keywords.include?(keyword) ? '' : {}
+            parent[keyword] = string_keywords.include?(keyword) ? '' : {}
+          elsif words.count == 1 && parent.is_a?(Hash)
+            parent[key] = {}
           end
-          parent[keyword] = node
-          node
         end
       end
 
@@ -70,7 +70,7 @@ module Interdasting
             parent << source.try(:strip) || ''
           when Hash
             k, v = source.split(':', 2)
-            parent[k] = v.try(:strip)
+            parent[k] = v ? v.try(:strip) : {}
           end
         end
       end
@@ -79,10 +79,10 @@ module Interdasting
         return true unless valid_line?(line)
         if line =~ /^\s*def\s+\w+$/
           comments[method_name(line)] = temp_comment.join("\n")
-          return true
+          true
         else
           temp_comment << line
-          return false
+          false
         end
       end
 

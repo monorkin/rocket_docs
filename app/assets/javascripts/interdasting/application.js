@@ -135,16 +135,29 @@ $(document).ready(function () {
                  '<th>Value</th>'+
                '</tr>';
     content += '</thead>';
-    $.each(params, function(k, _v) {
-      var saved = '';
-      if (savedParams && savedParams[k]) saved = savedParams[k];
+    $.each(params, function(k, v) {
+      content += paramsInputTableRow(k, v, null, savedParams);
+    });
+    content += '</table>';
+    return content
+  }
+
+  function paramsInputTableRow(k, v, wrapper, savedParams) {
+    var content = '';
+    var saved = '';
+    if (wrapper) k = wrapper + '[' + k + ']';
+    if (savedParams && savedParams[k]) saved = savedParams[k];
+    if (typeof v === 'object') {
+      $.each(v, function(kk, vv) {
+        content += paramsInputTableRow(kk, vv, k, savedParams);
+      });
+    } else {
       content += '<tr>'+
                    '<td>' + k + '</td>'+
                    '<td><input type="text" class="form-control" value="' + saved + '" data-key="' + k + '"></td>'+
                  '</tr>';
-    });
-    content += '</table>';
-    return content
+    }
+    return content;
   }
 
   function paramsTable(params) {
@@ -155,14 +168,27 @@ $(document).ready(function () {
                  '<th>Type</th>'+
                '</tr>';
     content += '</thead>';
-    $.each(params, function(k, v) {
+    $.each(params, function(k, v){
+      content += paramsTableRow(k, v, null);
+    });
+    content += '</table>';
+    return content
+  }
+
+  function paramsTableRow(k, v, wrapper) {
+    var content = '';
+    if (wrapper) k = wrapper + '[' + k + ']';
+    if (typeof v === 'object') {
+      $.each(v, function(kk, vv) {
+        content += paramsTableRow(kk, vv, k);
+      });
+    } else {
       content += '<tr>'+
                    '<td>' + k + '</td>'+
                    '<td>' + v + '</td>'+
                  '</tr>';
-    });
-    content += '</table>';
-    return content
+    }
+    return content;
   }
 
   function indentResponse(response) {
