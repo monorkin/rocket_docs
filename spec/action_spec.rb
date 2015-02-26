@@ -30,7 +30,15 @@ RSpec.describe Interdasting::Documentation::Action do
       expect(action.params('POST')).to(eq(
         'id' => 'integer',
         'age' => 'integer',
-        'name' => 'string'
+        'name' => 'string',
+        'additional' => {
+          'likes_cookies' => 'boolean',
+          'likes_top_gear' => 'boolean',
+          'language' => {
+            'name' => 'string',
+            'level_of_knowlage' => 'string (A1, A2, B1, B2, C1, C2)'
+          }
+        }
       ))
 
       expect(action.params('GET')).to(eq(

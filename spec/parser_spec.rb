@@ -17,6 +17,10 @@ Doc
   euismod lectus semper.
 Params
   id: integer
+  additional
+    likes_cookies: boolean
+    likes_top_gear: boolean
+    languages: string (coma separated list)
 EOF
   expected_new_comments = <<-EOF
 
@@ -33,6 +37,12 @@ POST
   Params
     id:   integer
     age:  integer
+    additional
+      likes_cookies: boolean
+      likes_top_gear: boolean
+      language
+        name: string
+        level_of_knowlage: string (A1, A2, B1, B2, C1, C2)
     name: string
 EOF
   expected_edit_comments = <<-EOF
@@ -110,6 +120,14 @@ EOF
           'PARAMS' => {
             'id' => 'integer',
             'age' => 'integer',
+            'additional' => {
+              'likes_cookies' => 'boolean',
+              'likes_top_gear' => 'boolean',
+              'language' => {
+                'name' => 'string',
+                'level_of_knowlage' => 'string (A1, A2, B1, B2, C1, C2)'
+              }
+            },
             'name' => 'string'
           }
         }
