@@ -14,14 +14,10 @@ Example:
 
 # Installation
 
-Currently, you can only install this gem via GitHub.
-
 ```Ruby
 # In your Gemfile
-gem 'interdasting', github: 'stankec/interdasting'
+gem 'interdasting'
 ```
-
-It will be released on :gem: [RubyGems](https://rubygems.org/) once better specs have been written and some missing features get implemented.
 
 If you are using [rocket_pants](https://github.com/Sutto/rocket_pants) you only have to mount the engine in your routes file.
 
@@ -82,6 +78,7 @@ end
 
 `PARAMS` is used to define which parameters the action accepts.
 If you are using rocket_pants this will be automatically populated.
+Note that nested parameters are allowed.
 
 Example:
 ```Ruby
@@ -90,6 +87,9 @@ Example:
 #
 # Params
 #   id: integer (the post's identifier)
+#   additional
+#     author_id: integer
+#     release_date: date
 #
 
 def show
