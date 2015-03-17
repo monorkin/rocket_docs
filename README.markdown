@@ -30,17 +30,17 @@ The gem also adds two new rake tasks for generating documentation as static html
 
 ```Ruby
 # For HTML files
-rake RocketDocs:generate[version_name, input_files, output_folder]
+rake rocket_docs:generate[version_name, input_files, output_folder]
 # Alias
-rake RocketDocs:gen[version_name, input_files, output_folder]
+rake rocket_docs:gen[version_name, input_files, output_folder]
 ```
 
 ```Ruby
 # For MARKDOWN files
-rake RocketDocs:generate_markdown[version_name, input_files, output_folde]
+rake rocket_docs:generate_markdown[version_name, input_files, output_folde]
 # Aliases
-rake RocketDocs:generate_md[version_name, input_files, output_folde]
-rake RocketDocs:gen_md[version_name, input_files, output_folde]
+rake rocket_docs:generate_md[version_name, input_files, output_folde]
+rake rocket_docs:gen_md[version_name, input_files, output_folde]
 ```
 
 # Configuration
