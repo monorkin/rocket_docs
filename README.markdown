@@ -16,7 +16,7 @@ Example:
 
 ```Ruby
 # In your Gemfile
-gem 'interdasting'
+gem 'rocket_docs'
 ```
 
 If you are using [rocket_pants](https://github.com/Sutto/rocket_pants) you only have to mount the engine in your routes file.
@@ -30,17 +30,17 @@ The gem also adds two new rake tasks for generating documentation as static html
 
 ```Ruby
 # For HTML files
-rake interdasting:generate[version_name, input_files, output_folder]
+rake RocketDocs:generate[version_name, input_files, output_folder]
 # Alias
-rake interdasting:gen[version_name, input_files, output_folder]
+rake RocketDocs:gen[version_name, input_files, output_folder]
 ```
 
 ```Ruby
 # For MARKDOWN files
-rake interdasting:generate_markdown[version_name, input_files, output_folde]
+rake RocketDocs:generate_markdown[version_name, input_files, output_folde]
 # Aliases
-rake interdasting:generate_md[version_name, input_files, output_folde]
-rake interdasting:gen_md[version_name, input_files, output_folde]
+rake RocketDocs:generate_md[version_name, input_files, output_folde]
+rake RocketDocs:gen_md[version_name, input_files, output_folde]
 ```
 
 # Configuration
@@ -169,7 +169,7 @@ The rake tasks accept three arguments. A version name, a list of file paths sepa
 Example:
 
 ```Ruby
-rake interdasting:generate['Legacy','app/controllers/api/v1/people_controller.rb app/controllers/api/v2/posts_controller.rb','public/system/api-docs']
+rake RocketDocs:generate['Legacy','app/controllers/api/v1/people_controller.rb app/controllers/api/v2/posts_controller.rb','public/system/api-docs']
 ```
 This would generate a `Legacy.html` file in your `public/system/api-docs` folder and you could access it by going to `http://localhost:3000/system/api-docs/Legacy.html`
 
