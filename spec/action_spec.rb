@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Interdasting::Documentation::Action do
-  action = Interdasting::Documentation.new(
-          'v1', Interdasting::Router.api_full['v1']
+RSpec.describe RocketDocs::Documentation::Action do
+  action = RocketDocs::Documentation.new(
+          'v1', RocketDocs::Router.api_full['v1']
         ).controllers.first.actions.select { |a| a.name == 'create' }.first
 
   describe '#url' do

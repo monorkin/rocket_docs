@@ -1,7 +1,7 @@
-require 'interdasting/documentation/controller'
-require 'interdasting/documentation/action'
+require 'rocket_docs/documentation/controller'
+require 'rocket_docs/documentation/action'
 
-module Interdasting
+module RocketDocs
   class Documentation
     attr_reader :version
     attr_reader :controllers

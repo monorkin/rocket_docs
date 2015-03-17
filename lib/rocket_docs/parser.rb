@@ -1,4 +1,4 @@
-module Interdasting
+module RocketDocs
   module Parser
     class << self
       def comments_for_method(method_name, file_path)

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe Interdasting::Documentation do
+RSpec.describe RocketDocs::Documentation do
   describe '#initialize' do
     it 'creates all the controllers' do
-      doc = Interdasting::Documentation.new(
-              'v1', Interdasting::Router.api_full['v1']
+      doc = RocketDocs::Documentation.new(
+              'v1', RocketDocs::Router.api_full['v1']
             )
       expect(doc.controllers).to be_a Array
       expect(doc.controllers.map(&:full_name)).to eq %w(api/v1/people)

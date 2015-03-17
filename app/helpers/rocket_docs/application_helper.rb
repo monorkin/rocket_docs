@@ -1,4 +1,4 @@
-module Interdasting
+module RocketDocs
   module ApplicationHelper
     def doc_id(doc)
       "version_#{web_safe(doc.version)}"

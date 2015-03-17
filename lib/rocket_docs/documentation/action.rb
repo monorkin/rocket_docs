@@ -1,4 +1,4 @@
-module Interdasting
+module RocketDocs
   class Documentation
     class Action
       attr_reader :name
@@ -43,11 +43,11 @@ module Interdasting
 
       def generate
         return @doc = {} unless @comments.present?
-        @doc = Interdasting::Parser.parse_comments(@comments).value
+        @doc = RocketDocs::Parser.parse_comments(@comments).value
       end
 
       def _routes
-        Interdasting::Router.app_routes
+        RocketDocs::Router.app_routes
       end
 
       def sanitize_methods(methods)

@@ -1,6 +1,6 @@
-module Interdasting
+module RocketDocs
   class Engine < ::Rails::Engine
-    isolate_namespace Interdasting
+    isolate_namespace RocketDocs
     require 'jquery-rails'
     require 'bootstrap-sass'
 

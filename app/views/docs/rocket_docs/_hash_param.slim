@@ -1,6 +1,6 @@
 - hash.each do |k, v|
   - if v.is_a?(Hash)
-    = render 'docs/interdasting/hash_param', hash: v, wrap: wrap ? "#{wrap}[#{k}]" : k
+    = render 'docs/rocket_docs/hash_param', hash: v, wrap: wrap ? "#{wrap}[#{k}]" : k
   - else
     tr
       td = wrap ? "#{wrap}[#{k}]" : k

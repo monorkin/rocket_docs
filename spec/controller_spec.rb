@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Interdasting::Documentation::Controller do
-  controller = Interdasting::Documentation.new(
-          'v1', Interdasting::Router.api_full['v1']
+RSpec.describe RocketDocs::Documentation::Controller do
+  controller = RocketDocs::Documentation.new(
+          'v1', RocketDocs::Router.api_full['v1']
         ).controllers.first
 
   describe '#initialize' do

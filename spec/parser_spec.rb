@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Interdasting::Parser do
+RSpec.describe RocketDocs::Parser do
   # Expected comments
   expected_index_comments = <<-EOF
 Doc
@@ -75,8 +75,8 @@ EOF
 
   describe '#method_comments' do
     it 'returns a hash of method names with their comments' do
-      file_path = Interdasting::Router.api_controller_paths.first
-      comments = Interdasting::Parser.method_comments(file_path)
+      file_path = RocketDocs::Router.api_controller_paths.first
+      comments = RocketDocs::Parser.method_comments(file_path)
       expected_comments = {
         'index'   => expected_index_comments,
         'show'    => expected_show_comments,
@@ -93,8 +93,8 @@ EOF
 
   describe '#comments_for_method' do
     it 'returns the comments before a method' do
-      file_path = Interdasting::Router.api_controller_paths.first
-      comments = Interdasting::Parser.comments_for_method('index', file_path)
+      file_path = RocketDocs::Router.api_controller_paths.first
+      comments = RocketDocs::Parser.comments_for_method('index', file_path)
       expect(comments).to be_a String
       expect(comments).to eq expected_index_comments
     end
@@ -102,7 +102,7 @@ EOF
 
   describe '#parse_comments' do
     it 'returns a hash containing the values of the comments' do
-      comments = Interdasting::Parser.parse_comments(expected_create_comments)
+      comments = RocketDocs::Parser.parse_comments(expected_create_comments)
       expect(comments).to be_a IndentationParser::RootNode
       comments = comments.value
       expect(comments).to be_a Hash

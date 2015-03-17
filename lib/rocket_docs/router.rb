@@ -1,4 +1,4 @@
-module Interdasting
+module RocketDocs
   module Router
     class << self
       def api_full

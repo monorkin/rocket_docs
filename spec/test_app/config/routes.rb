@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount Interdasting::Engine => '/api-doc'
+  mount RocketDocs::Engine => '/api-doc'
 
   root 'application#hello'
 

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Interdasting::Router do
+RSpec.describe RocketDocs::Router do
   describe '#api_full' do
-    api_full = Interdasting::Router.api_full
+    api_full = RocketDocs::Router.api_full
 
     it 'returns a hash' do
       expect(api_full).to be_a(Hash)
@@ -49,7 +49,7 @@ RSpec.describe Interdasting::Router do
       expected_result = [
         'api/v1/people', 'api/v2/posts', 'v3/people', 'v3/posts'
       ]
-      expect(Interdasting::Router.api_controller_names).to eq(expected_result)
+      expect(RocketDocs::Router.api_controller_names).to eq(expected_result)
     end
   end
 
@@ -61,7 +61,7 @@ RSpec.describe Interdasting::Router do
         V3::PeopleController,
         V3::PostsController
       ]
-      expect(Interdasting::Router.api_controllers).to eq(expected_result)
+      expect(RocketDocs::Router.api_controllers).to eq(expected_result)
     end
   end
 
@@ -75,7 +75,7 @@ RSpec.describe Interdasting::Router do
         '/test_app/app/controllers/v3/posts_controller.rb'
       ]
       expected_result = expected_result.map { |r| root + r }
-      expect(Interdasting::Router.api_controller_paths).to eq(expected_result)
+      expect(RocketDocs::Router.api_controller_paths).to eq(expected_result)
     end
   end
 end

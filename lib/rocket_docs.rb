@@ -1,12 +1,12 @@
 require 'pry'
 require 'slim'
 require 'indentation-parser'
-require 'interdasting/engine'
-require 'interdasting/router'
-require 'interdasting/parser'
-require 'interdasting/documentation'
+require 'rocket_docs/engine'
+require 'rocket_docs/router'
+require 'rocket_docs/parser'
+require 'rocket_docs/documentation'
 
-module Interdasting
+module RocketDocs
   def self.documentation
     Router.api_full.map do |version, controller|
       Documentation.new(version, controller)

@@ -1,6 +1,6 @@
 # About
 
-Interdasting is a automatic documentation generator for APIs.
+RocketDocs is a automatic documentation generator for APIs.
 
 It is intended to be used with :rocket: [rocket_pants](https://github.com/Sutto/rocket_pants) based APIs but it can also be used as a standalone generator through rake tasks.
 
@@ -23,7 +23,7 @@ If you are using [rocket_pants](https://github.com/Sutto/rocket_pants) you only 
 
 ```Ruby
 # In your config/routes.rb
-mount Interdasting::Engine => '/api-doc'
+mount RocketDocs::Engine => '/api-doc'
 ```
 
 The gem also adds two new rake tasks for generating documentation as static html or markdown files

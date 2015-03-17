@@ -10,7 +10,7 @@ require "sprockets/railtie"
 
 Bundler.require(*Rails.groups)
 require "rocket_pants"
-require "interdasting"
+require "rocket_docs"
 
 module TestApp
   class Application < Rails::Application

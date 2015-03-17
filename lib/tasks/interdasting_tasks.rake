@@ -1,4 +1,4 @@
-namespace :interdasting do
+namespace :rocket_docs do
   desc 'Generates static HTML documentation files'
   generator_args = [:version_name, :input_files, :output_folder]
   task :generate, generator_args => :environment  do |_task, args|
@@ -6,11 +6,11 @@ namespace :interdasting do
     fail('A version name has to be provided') unless version
     fail('At leas one input file has to be provided') unless input
 
-    doc = Interdasting.documentation_for_files(input, version)
+    doc = RocketDocs.documentation_for_files(input, version)
 
     template_folder = generator_template_folder
-    layout_path = template_folder + '/layouts/interdasting/application.slim'
-    template_path = template_folder + '/docs/interdasting/show.slim'
+    layout_path = template_folder + '/layouts/rocket_docs/application.slim'
+    template_path = template_folder + '/docs/rocket_docs/show.slim'
 
     prepare_generator_output(output, version, 'html')
 
@@ -32,10 +32,10 @@ namespace :interdasting do
   task :generate_markdown, md_generator_args => :environment  do |_task, args|
     version, input, output = sanitize_generator_input(args)
 
-    doc = Interdasting.documentation_for_files(input, version)
+    doc = RocketDocs.documentation_for_files(input, version)
 
     template_folder = generator_template_folder
-    template_path = template_folder + '/docs/interdasting/show.markdown.erb'
+    template_path = template_folder + '/docs/rocket_docs/show.markdown.erb'
 
     prepare_generator_output(output, version, 'markdown')
 
@@ -79,7 +79,7 @@ namespace :interdasting do
     lookup_context = ActionView::LookupContext.new(template_folder)
     view_builder = ActionView::Base.new(lookup_context)
     view_builder.extend ActionView::Helpers
-    view_builder.extend Interdasting::ApplicationHelper
+    view_builder.extend RocketDocs::ApplicationHelper
     view_builder
   end
 end
