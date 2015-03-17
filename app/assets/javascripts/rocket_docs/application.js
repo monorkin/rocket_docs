@@ -22,12 +22,15 @@ $(document).ready(function () {
     $testButton.click(function(){
       saveParams($modal.find('.modal-body'), $triggerButton);
       var $response = $modal.find('.response');
+
       $modal.find('.response-body').removeClass('hidden');
       addSpinner($response);
+
       $.ajax(
         buildRequestParams($modal.find('.modal-body'), $triggerButton.data('url'), $triggerButton.data('request-method'))
       ).done(function(data, textStatus, jqXHR) {
-        response = jqXHR.responseText;
+        var response = jqXHR.responseText;
+
         $response.html('');
         $response.text(response);
         $(window).trigger('resize');
@@ -74,7 +77,7 @@ $(document).ready(function () {
     var $requestBody = $object.find('textarea');
 
     if ($inputs.length !== 0) {
-      params = {};
+      var params = {};
       $inputs.each(function(i, $input) {
         $input = $($input);
         params[$input.data('key')] = $input.val();
@@ -106,14 +109,16 @@ $(document).ready(function () {
       var regex = /\{[^\s]+\}/;
       var match = regex.exec(url);
       if (match && match.length !== 0) {
-        tempParams = {};
+        var tempParams = {};
         $.each(match, function(i, m) {
           tempParams[m.replace(/[\{\}]/g,'')] = i;
         });
         content += paramsInputTable(tempParams, savedParams);
       }
       var saved = '';
-      if (savedText) saved = savedText;
+      if (savedText) {
+        saved = savedText;
+      }
       content += '<textarea class="form-control" rows="6" cols="90">' + saved + '</textarea>';
     }
     if (method !== 'GET' && params) {
@@ -130,7 +135,7 @@ $(document).ready(function () {
   }
 
   function paramsInputTable(params, savedParams) {
-    content  = '<table class="table table-striped">';
+    var content  = '<table class="table table-striped">';
     content += '<thead>';
     content += '<tr>'+
                  '<th>Param</th>'+
@@ -147,8 +152,12 @@ $(document).ready(function () {
   function paramsInputTableRow(k, v, wrapper, savedParams) {
     var content = '';
     var saved = '';
-    if (wrapper) k = wrapper + '[' + k + ']';
-    if (savedParams && savedParams[k]) saved = savedParams[k];
+    if (wrapper) {
+      k = wrapper + '[' + k + ']';
+    }
+    if (savedParams && savedParams[k]) {
+      saved = savedParams[k];
+    }
     if (typeof v === 'object') {
       $.each(v, function(kk, vv) {
         content += paramsInputTableRow(kk, vv, k, savedParams);
@@ -163,7 +172,7 @@ $(document).ready(function () {
   }
 
   function paramsTable(params) {
-    content  = '<table class="table table-striped">';
+    var content  = '<table class="table table-striped">';
     content += '<thead>';
     content += '<tr>'+
                  '<th>Name</th>'+
@@ -179,7 +188,9 @@ $(document).ready(function () {
 
   function paramsTableRow(k, v, wrapper) {
     var content = '';
-    if (wrapper) k = wrapper + '[' + k + ']';
+    if (wrapper) {
+      k = wrapper + '[' + k + ']';
+    }
     if (typeof v === 'object') {
       $.each(v, function(kk, vv) {
         content += paramsTableRow(kk, vv, k);
@@ -191,10 +202,5 @@ $(document).ready(function () {
                  '</tr>';
     }
     return content;
-  }
-
-  function indentResponse(response) {
-    // TODO: code to indent the response depending on if it's a JSON or XML response
-    return response;
   }
 });
