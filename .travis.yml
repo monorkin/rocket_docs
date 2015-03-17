@@ -11,3 +11,6 @@ gemfile:
   - gemfiles/4.2.gemfile
 install:
   - "travis_retry bundle install"
+addons:
+  code_climate:
+    repo_token: 'e1186631875f70d82d56416eb3cce34e04775ae8d38ee43cd9539b434d043918'

@@ -21,23 +21,23 @@ $(document).ready(function () {
     );
     $testButton.click(function(){
       saveParams($modal.find('.modal-body'), $triggerButton);
-      var $response = $modal.find('.response')
+      var $response = $modal.find('.response');
       $modal.find('.response-body').removeClass('hidden');
       addSpinner($response);
       $.ajax(
         buildRequestParams($modal.find('.modal-body'), $triggerButton.data('url'), $triggerButton.data('request-method'))
       ).done(function(data, textStatus, jqXHR) {
-        response = jqXHR.responseText
+        response = jqXHR.responseText;
         $response.html('');
         $response.text(response);
         $(window).trigger('resize');
       });
     });
-  }).on('hidden.bs.modal', function (e) {
+  }).on('hidden.bs.modal', function () {
     var $modal = $(this);
     $modal.find('h4.modal-title').text('Try it');
     $modal.find('.modal-body').html('');
-  })
+  });
 
   function buildRequestParams($object, url, method) {
     var $inputs = $object.find('input[data-key]');
@@ -46,11 +46,11 @@ $(document).ready(function () {
     var processData = true;
 
     if ($inputs.length !== 0) {
-      data = {}
+      data = {};
       $inputs.each(function(i, $input) {
         $input = $($input);
         if (url.indexOf('{' + $input.data('key') + '}')) {
-          url = url.replace('{' + $input.data('key') + '}', $input.val())
+          url = url.replace('{' + $input.data('key') + '}', $input.val());
         } else {
           data[$input.data('key')] = $input.val();
         }
@@ -66,7 +66,7 @@ $(document).ready(function () {
       type: method,
       processData: processData,
       data: data
-    }
+    };
   }
 
   function saveParams($object, $saveToObject) {
@@ -98,31 +98,33 @@ $(document).ready(function () {
   }
 
   function contentForModal(url, method, params, savedParams, savedText) {
-    var content = ''
-    content += '<h3>Request body</h3>'
+    var content = '';
+    content += '<h3>Request body</h3>';
     if (method === 'GET' && params) {
-      content += paramsInputTable(params, savedParams)
+      content += paramsInputTable(params, savedParams);
     } else {
       var regex = /\{[^\s]+\}/;
       var match = regex.exec(url);
       if (match && match.length !== 0) {
-        tempParams = {}
-        $.each(match, function(i, m){ tempParams[m.replace(/[\{\}]/g,'')] = i });
-        content += paramsInputTable(tempParams, savedParams)
+        tempParams = {};
+        $.each(match, function(i, m) {
+          tempParams[m.replace(/[\{\}]/g,'')] = i;
+        });
+        content += paramsInputTable(tempParams, savedParams);
       }
-      var saved = ''
+      var saved = '';
       if (savedText) saved = savedText;
       content += '<textarea class="form-control" rows="6" cols="90">' + saved + '</textarea>';
     }
     if (method !== 'GET' && params) {
-      content += '<h4>Expected params</h4>'
-      content += paramsTable(params)
+      content += '<h4>Expected params</h4>';
+      content += paramsTable(params);
     }
-    content += '<div class="response-body hidden">'
+    content += '<div class="response-body hidden">';
     content += '<hr>';
-    content += '<h3>Response</h3>'
-    content += '<pre><code class="response"></code></pre>'
-    content += '</div>'
+    content += '<h3>Response</h3>';
+    content += '<pre><code class="response"></code></pre>';
+    content += '</div>';
 
     return content;
   }
@@ -139,7 +141,7 @@ $(document).ready(function () {
       content += paramsInputTableRow(k, v, null, savedParams);
     });
     content += '</table>';
-    return content
+    return content;
   }
 
   function paramsInputTableRow(k, v, wrapper, savedParams) {
@@ -172,7 +174,7 @@ $(document).ready(function () {
       content += paramsTableRow(k, v, null);
     });
     content += '</table>';
-    return content
+    return content;
   }
 
   function paramsTableRow(k, v, wrapper) {
