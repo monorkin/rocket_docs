@@ -211,7 +211,7 @@ _Note: If no new value was defined in a method specific block then the default w
 
 # Contributing
 
-If you feel like helping, feel free to fork this project and issue a pull request. There are many things that need to be done. Here's jus a few:
+If you feel like helping, feel free to fork this project and issue a pull request. There are many things that need to be done. Here's just a few:
 
 1. Better specs
 2. Caching
@@ -219,3 +219,8 @@ If you feel like helping, feel free to fork this project and issue a pull reques
 # License
 
 This project rocks and uses MIT-LICENSE.
+
+# Metrics
+
+[![Code Climate](https://codeclimate.com/github/Stankec/Rocket_Docs/badges/gpa.svg)](https://codeclimate.com/github/Stankec/Rocket_Docs)
+[![Test Coverage](https://codeclimate.com/github/Stankec/Rocket_Docs/badges/coverage.svg)](https://codeclimate.com/github/Stankec/Rocket_Docs)
