@@ -66,7 +66,7 @@ module RocketDocs
         p.on_leaf do |parent, source|
           case parent
           when String
-            parent << ' ' if parent.length != 0
+            parent << "\n" if parent.length != 0
             parent << source.try(:strip) || ''
           when Hash
             k, v = source.split(':', 2)

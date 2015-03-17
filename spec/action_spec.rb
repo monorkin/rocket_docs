@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe RocketDocs::Documentation::Action do
-  action = RocketDocs::Documentation.new(
-          'v1', RocketDocs::Router.api_full['v1']
-        ).controllers.first.actions.select { |a| a.name == 'create' }.first
+  action = RocketDocs::Documentation
+           .new('v1', RocketDocs::Router.api_full['v1'])
+           .controllers.first.actions.select { |a| a.name == 'create' }.first
 
   describe '#url' do
     it 'returns the actions URL for a given method' do
@@ -16,9 +16,9 @@ RSpec.describe RocketDocs::Documentation::Action do
   describe '#description' do
     it 'returns the action\'s description for each method' do
       desc = 'Praesent maximus, leo a maximus fringilla, urna felis '\
-             'sollicitudin nunc, eu pulvinar est urna eu justo. Phasellus '\
-             'quis hendrerit nibh. Praesent id nunc ac augue ultricies rutrum '\
-             'at vel quam.'
+             'sollicitudin<br>nunc, eu pulvinar est urna eu justo. Phasellus '\
+             'quis hendrerit nibh.<br>Praesent id nunc ac augue ultricies '\
+             'rutrum at vel quam.'
       expect(action.description('POST')).to eq desc
       expect(action.description('GET')).to eq desc
       expect(action.description('PUT')).to eq desc
@@ -27,23 +27,27 @@ RSpec.describe RocketDocs::Documentation::Action do
 
   describe '#params' do
     it 'returns a hash of params for a given method the action expects' do
-      expect(action.params('POST')).to(eq(
-        'id' => 'integer',
-        'age' => 'integer',
-        'name' => 'string',
-        'additional' => {
-          'likes_cookies' => 'boolean',
-          'likes_top_gear' => 'boolean',
-          'language' => {
-            'name' => 'string',
-            'level_of_knowlage' => 'string (A1, A2, B1, B2, C1, C2)'
+      expect(action.params('POST')).to(
+        eq(
+          'id' => 'integer',
+          'age' => 'integer',
+          'name' => 'string',
+          'additional' => {
+            'likes_cookies' => 'boolean',
+            'likes_top_gear' => 'boolean',
+            'language' => {
+              'name' => 'string',
+              'level_of_knowlage' => 'string (A1, A2, B1, B2, C1, C2)'
+            }
           }
-        }
-      ))
+        )
+      )
 
-      expect(action.params('GET')).to(eq(
-        'id' => 'integer'
-      ))
+      expect(action.params('GET')).to(
+        eq(
+          'id' => 'integer'
+        )
+      )
     end
   end
 

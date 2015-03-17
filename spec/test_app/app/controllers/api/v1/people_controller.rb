@@ -7,6 +7,8 @@ module Api
       #   imperdiet metus tincidunt eget. Phasellus finibus elementum
       #   scelerisque.
       #
+      #   Hello there!
+      #
       def index
         puts 'Oh really?' if (true != false) # inline coments should be ignored
         exposes (0...1500).to_a.map do |_i|

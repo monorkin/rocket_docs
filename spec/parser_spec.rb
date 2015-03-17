@@ -8,6 +8,7 @@ Doc
   gravida convallis aliquam. Duis pellentesque bibendum ipsum, vel
   imperdiet metus tincidunt eget. Phasellus finibus elementum
   scelerisque.
+  Hello there!
 EOF
   expected_show_comments = <<-EOF
 Doc
@@ -108,9 +109,9 @@ EOF
       expect(comments).to be_a Hash
       expect(comments).to eq(
         'DOC' => 'Praesent maximus, leo a maximus fringilla, urna felis '\
-                 'sollicitudin nunc, eu pulvinar est urna eu justo. Phasellus '\
-                 'quis hendrerit nibh. Praesent id nunc ac augue ultricies '\
-                 'rutrum at vel quam.',
+                 "sollicitudin\nnunc, eu pulvinar est urna eu justo. "\
+                 "Phasellus quis hendrerit nibh.\nPraesent id nunc ac augue "\
+                 'ultricies rutrum at vel quam.',
         'GET' => {
           'PARAMS' => {
             'id' => 'integer'

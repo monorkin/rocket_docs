@@ -22,7 +22,8 @@ module RocketDocs
       end
 
       def description(method = default_method)
-        (@doc[method] && @doc[method]['DOC']) || @doc['DOC']
+        desc = (@doc[method] && @doc[method]['DOC']) || @doc['DOC']
+        desc && CGI.escapeHTML(desc).gsub("\n", '<br>').html_safe
       end
 
       def params(method = default_method)
