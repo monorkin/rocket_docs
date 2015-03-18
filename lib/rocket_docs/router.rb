@@ -25,16 +25,22 @@ module RocketDocs
       end
 
       def api_controller_names
-        ar = routes.named_routes.select { |_k, v| v.defaults[:rp_prefix] }
+        ar = routes.named_routes.select do |_k, route|
+          route && route.path && route.path.requirements[:version]
+        end
         ar.values.map { |r| r.defaults[:controller] }.uniq
       end
 
       def routes_for_version(version)
-        routes.to_a.select { |v| v && v.defaults[:version] == version }
+        routes.to_a.select do |r|
+          versions = extract_versions_from_route(r)
+          versions && versions.include?(version)
+        end
       end
 
       def versions
-        routes.to_a.map { |r| r && r.defaults[:version] }.uniq.compact
+        routes.to_a.map { |r| extract_versions_from_route(r) }
+          .flatten.uniq.compact
       end
 
       def routes
@@ -46,6 +52,15 @@ module RocketDocs
       end
 
       private
+
+      def extract_versions_from_route(route)
+        return unless route && route.path && route.path.requirements[:version]
+        route.path.requirements[:version].to_s.split('|').map do |v|
+          v.gsub!(/[^\?]*\?(?=\d+)/, '')
+          v.gsub!(/[^\d]*/, '')
+          v.to_i
+        end
+      end
 
       def fill_controllers_hash_for_version(version, hash)
         routes = routes_for_version(version)

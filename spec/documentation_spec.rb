@@ -4,8 +4,8 @@ RSpec.describe RocketDocs::Documentation do
   describe '#initialize' do
     it 'creates all the controllers' do
       doc = RocketDocs::Documentation.new(
-              'v1', RocketDocs::Router.api_full['v1']
-            )
+        1, RocketDocs::Router.api_full[1]
+      )
       expect(doc.controllers).to be_a Array
       expect(doc.controllers.map(&:full_name)).to eq %w(api/v1/people)
       expect(doc.controllers.map(&:name)).to eq %w(People)
