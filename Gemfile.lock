@@ -1,13 +1,14 @@
 PATH
   remote: .
   specs:
-    rocket_docs (0.0.3)
+    rocket_docs (0.0.5)
       bootstrap-sass (~> 3.3)
       indentation-parser (~> 1)
       jquery-rails (~> 3.1)
       rails
       sass-rails
       slim-rails (~> 3)
+      uglifier (~> 2.7)
 
 GEM
   remote: https://rubygems.org/
@@ -203,6 +204,9 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uglifier (2.7.1)
+      execjs (>= 0.3.0)
+      json (>= 1.8.0)
     will_paginate (3.0.7)
 
 PLATFORMS
