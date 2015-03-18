@@ -25,13 +25,16 @@ module RocketDocs
       end
 
       def api_controller_names
-        ar = routes.named_routes.select { |_k, v| v.defaults[:rp_prefix] }
+        ar = routes.named_routes.select do |_k, route|
+          route && route.path && route.path.requirements[:version]
+        end
         ar.values.map { |r| r.defaults[:controller] }.uniq
       end
 
       def routes_for_version(version)
         routes.to_a.select do |r|
-          extract_versions_from_route(r).include?(version)
+          versions = extract_versions_from_route(r)
+          versions && versions.include?(version)
         end
       end
 
