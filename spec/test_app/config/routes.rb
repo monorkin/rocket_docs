@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :people
     end
 
-    api version: 2, module: 'v2', allow_prefix: 'v', defaults: { version: 'v2' } do
+    api version: 2, module: 'v2', allow_prefix: 'v' do
       resources :people
       resources :posts
     end

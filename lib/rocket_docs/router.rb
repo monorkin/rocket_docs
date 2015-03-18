@@ -51,7 +51,7 @@ module RocketDocs
       private
 
       def extract_versions_from_route(route)
-        return unless route
+        return unless route && route.path && route.path.requirements[:version]
         route.path.requirements[:version].to_s.split('|').map do |v|
           v.gsub!(/[^\?]*\?(?=\d+)/, '')
           v.gsub!(/[^\d]*/, '')
