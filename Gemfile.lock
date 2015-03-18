@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rocket_docs (0.0.2)
+    rocket_docs (0.0.3)
       bootstrap-sass (~> 3.3)
       indentation-parser (~> 1)
       jquery-rails (~> 3.1)

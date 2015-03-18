@@ -1,4 +1,3 @@
-require 'pry'
 require 'slim'
 require 'indentation-parser'
 require 'rocket_docs/engine'
