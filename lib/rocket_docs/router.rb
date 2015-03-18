@@ -30,11 +30,14 @@ module RocketDocs
       end
 
       def routes_for_version(version)
-        routes.to_a.select { |v| v && v.defaults[:version] == version }
+        routes.to_a.select do |r|
+          extract_versions_from_route(r).include?(version)
+        end
       end
 
       def versions
-        routes.to_a.map { |r| r && r.defaults[:version] }.uniq.compact
+        routes.to_a.map { |r| extract_versions_from_route(r) }
+          .flatten.uniq.compact
       end
 
       def routes
@@ -46,6 +49,15 @@ module RocketDocs
       end
 
       private
+
+      def extract_versions_from_route(route)
+        return unless route
+        route.path.requirements[:version].to_s.split('|').map do |v|
+          v.gsub!(/[^\?]*\?(?=\d+)/, '')
+          v.gsub!(/[^\d]*/, '')
+          v.to_i
+        end
+      end
 
       def fill_controllers_hash_for_version(version, hash)
         routes = routes_for_version(version)
