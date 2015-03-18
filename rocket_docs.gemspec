@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails'
   s.add_dependency 'slim-rails',          '~> 3'
   s.add_dependency 'jquery-rails',        '~> 3.1'
+  s.add_dependency 'unglifier',           '~> 2.7'
   s.add_dependency 'sass-rails'
   s.add_dependency 'bootstrap-sass',      '~> 3.3'
   s.add_dependency 'indentation-parser',  '~> 1'
