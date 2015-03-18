@@ -10,31 +10,41 @@ RSpec.describe RocketDocs::Router do
 
     context 'contains all' do
       it 'versions' do
-        expect(api_full.keys).to eq %w(v1 v2 v3)
+        expect(api_full.keys).to eq [1, 2, 3, 4]
       end
 
       it 'controllers for every version' do
-        expect(api_full['v1'].keys).to eq %w(api/v1/people)
-        expect(api_full['v2'].keys).to eq %w(api/v2/people api/v2/posts)
-        expect(api_full['v3'].keys).to eq %w(v3/people v3/posts)
+        expect(api_full[1].keys).to eq %w(api/v1/people)
+        expect(api_full[2].keys).to eq %w(api/v2/people api/v2/posts)
+        expect(api_full[3].keys).to eq %w(v3/people v3/posts)
       end
 
       it 'actions for every controller' do
-        expect(api_full['v1']['api/v1/people'][:actions].keys.to_set).to(eq(
-          %w(index show new create edit update destroy).to_set
-        ))
-        expect(api_full['v2']['api/v2/people'][:actions].keys.to_set).to(eq(
-          %w(index show new create edit update destroy).to_set
-        ))
-        expect(api_full['v2']['api/v2/posts'][:actions].keys.to_set).to(eq(
-          %w(index show new create edit update destroy).to_set
-        ))
-        expect(api_full['v3']['v3/people'][:actions].keys.to_set).to(eq(
-          %w(index show new create edit update destroy).to_set
-        ))
-        expect(api_full['v3']['v3/posts'][:actions].keys.to_set).to(eq(
-          %w(index show new create edit update destroy).to_set
-        ))
+        expect(api_full[1]['api/v1/people'][:actions].keys.to_set).to(
+          eq(
+            %w(index show new create edit update destroy).to_set
+          )
+        )
+        expect(api_full[2]['api/v2/people'][:actions].keys.to_set).to(
+          eq(
+            %w(index show new create edit update destroy).to_set
+          )
+        )
+        expect(api_full[2]['api/v2/posts'][:actions].keys.to_set).to(
+          eq(
+            %w(index show new create edit update destroy).to_set
+          )
+        )
+        expect(api_full[3]['v3/people'][:actions].keys.to_set).to(
+          eq(
+            %w(index show new create edit update destroy).to_set
+          )
+        )
+        expect(api_full[3]['v3/posts'][:actions].keys.to_set).to(
+          eq(
+            %w(index show new create edit update destroy).to_set
+          )
+        )
       end
 
       it 'methods for every action for every controller' do

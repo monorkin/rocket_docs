@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RocketDocs::Documentation::Action do
   action = RocketDocs::Documentation
-           .new('v1', RocketDocs::Router.api_full['v1'])
+           .new('v1', RocketDocs::Router.api_full[1])
            .controllers.first.actions.select { |a| a.name == 'create' }.first
 
   describe '#url' do
