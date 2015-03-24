@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/rocket_docs.svg)](http://badge.fury.io/rb/rocket_docs)
 [![Build Status](https://travis-ci.org/Stankec/Rocket_Docs.svg?branch=master)](https://travis-ci.org/Stankec/Rocket_Docs)
 [![Code Climate](https://codeclimate.com/github/Stankec/Rocket_Docs/badges/gpa.svg)](https://codeclimate.com/github/Stankec/Rocket_Docs)
 [![Test Coverage](https://codeclimate.com/github/Stankec/Rocket_Docs/badges/coverage.svg)](https://codeclimate.com/github/Stankec/Rocket_Docs)
