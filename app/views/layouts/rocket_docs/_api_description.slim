@@ -1,0 +1,10 @@
+- if RocketDocs.description
+  .panel-group id="rocket_docs_documentation_description_group"
+    .panel.panel-default
+      .panel-heading
+        h4.panel-title
+          = link_to 'Description', "#rocket_docs_documentation_description", data: { toggle: 'collapse' }
+      .panel-collapse.collapse id='rocket_docs_documentation_description'
+        .panel-body
+          .panel-group id="rocket_docs_documentation_description_accordion"
+            = RocketDocs.format_string(RocketDocs.description)

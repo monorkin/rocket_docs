@@ -12,5 +12,6 @@ group :test do
   gem 'binding_of_caller',   '~> 0.7'
   gem 'sqlite3',             '~> 1.3'
   gem 'appraisal',           '~> 1.0'
+  gem 'simplecov',                 require: false
   gem 'codeclimate-test-reporter', require: nil
 end

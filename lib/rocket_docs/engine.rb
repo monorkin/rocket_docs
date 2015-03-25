@@ -8,5 +8,14 @@ module RocketDocs
       g.test_framework :rspec
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
+
+    class << self
+      def setup(&block)
+        block.call(RocketDocs)
+        {
+          self => RocketDocs.url
+        }
+      end
+    end
   end
 end

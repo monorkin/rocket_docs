@@ -1,9 +1,10 @@
 head
-  title RocketDocs
+  title = RocketDocs.title
   = stylesheet_link_tag    "rocket_docs/application", media: "all"
   = javascript_include_tag "rocket_docs/application"
 body
   = render 'layouts/rocket_docs/navigation'
   .container
+    = render 'layouts/rocket_docs/api_description'
     = yield
   = render 'layouts/rocket_docs/modal'

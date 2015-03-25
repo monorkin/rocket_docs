@@ -223,4 +223,5 @@ DEPENDENCIES
   rocket_docs!
   rocket_pants (~> 1.10)
   rspec-rails (~> 3.2)
+  simplecov
   sqlite3 (~> 1.3)
