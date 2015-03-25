@@ -54,6 +54,36 @@ By default every api route from your routes file will be used when generating th
 
 It's important to note that only methods that are accessible (are used in the routes file) will get documented.
 
+To change the title or description of the generated API you can ether use an initializer or the engine setup method.
+
+Engine setup:
+
+```Ruby
+# In your config/routes.rb
+mount (
+  RocketDocs::Engine.setup do |docs|
+    docs.url = '/api-doc'
+    docs.title = 'Custom API title'
+    docs.description = 'Custom API description'
+  end
+)
+```
+
+Initializer:
+
+A `config/initializers/rocket_docs.rb` has to be created!
+
+```Ruby
+# In your config/routes.rb
+mount RocketDocs::Engine => '/api-doc'
+
+# In config/initializers/rocket_docs.rb
+RocketDocs.config do |docs|
+  docs.title = 'Custom API title'
+  docs.description = 'Custom API description'
+end
+```
+
 # Usage
 
 If you are using [rocket_pants](https://github.com/Sutto/rocket_pants), after you mount the engine in your routes file the only thing you have to do is write some comments in front of the method you want to document.
