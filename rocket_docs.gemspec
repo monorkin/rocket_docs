@@ -20,12 +20,12 @@ Gem::Specification.new do |s|
   ]
 
   s.add_dependency 'rails'
-  s.add_dependency 'slim-rails',          '~> 3'
-  s.add_dependency 'jquery-rails',        '~> 3.1'
-  s.add_dependency 'uglifier',           '~> 2.7'
+  s.add_dependency 'slim-rails'
+  s.add_dependency 'jquery-rails'
+  s.add_dependency 'uglifier'
   s.add_dependency 'sass-rails'
-  s.add_dependency 'bootstrap-sass',      '~> 3.3'
-  s.add_dependency 'indentation-parser',  '~> 1'
+  s.add_dependency 'bootstrap-sass'
+  s.add_dependency 'indentation-parser'
 
   s.add_development_dependency 'rspec-rails',         '~> 3.2'
   s.add_development_dependency 'factory_girl_rails',  '~> 4.5'
