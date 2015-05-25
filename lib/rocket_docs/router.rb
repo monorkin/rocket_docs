@@ -9,12 +9,11 @@ module RocketDocs
       end
 
       def api_controller_paths(controllers = api_controllers)
-        cp = controllers.map do |c|
-          c.instance_methods(false).map do |m|
-            c.instance_method(m).source_location.first
+        controllers.map do |controller|
+          controller.action_methods.map do |action_method|
+            controller.instance_method(action_method).source_location.first
           end
-        end
-        cp.flatten.uniq.compact
+        end.flatten.uniq.compact
       end
 
       def api_controllers(names = api_controller_names)

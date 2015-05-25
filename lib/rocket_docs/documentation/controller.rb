@@ -50,7 +50,7 @@ module RocketDocs
       end
 
       def generate_hash
-        Digest::MD5.file(file).hexdigest
+        # Digest::MD5.file(file).hexdigest
       end
     end
   end
