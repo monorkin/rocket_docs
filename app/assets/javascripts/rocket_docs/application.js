@@ -3,6 +3,11 @@
 //= require bootstrap
 
 $(document).ready(function () {
+
+  ///////////////////
+  // Try out modal //
+  ///////////////////
+
   $('#try-out-modal').on('show.bs.modal', function (event) {
     var $modal = $(this);
     var $triggerButton = $(event.relatedTarget);
@@ -202,5 +207,18 @@ $(document).ready(function () {
                  '</tr>';
     }
     return content;
+  }
+
+  ///////////////////////////
+  // URL Accordion Anchors //
+  ///////////////////////////
+
+  if(window.location.hash !== '') {
+    var $element = $(window.location.hash);
+    $("#accordion .in").removeClass("in");
+    var $parents = $element.parents('.panel-collapse');
+    $parents.addClass('in');
+    $element.addClass('in');
+    $('html,body').animate({scrollTop: $element.offset().top}, 'fast');
   }
 });
