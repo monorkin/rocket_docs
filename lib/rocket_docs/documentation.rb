@@ -38,7 +38,7 @@ module RocketDocs
 
     def build_controllers
       @controllers = []
-      return unless @controllers_in.present?
+      @controllers_in ||= []
       @controllers_in.each do |n, v|
         @controllers << Controller.new(n, v[:path], v[:actions], self)
       end
