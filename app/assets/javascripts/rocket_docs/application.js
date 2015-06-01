@@ -213,7 +213,7 @@ $(document).ready(function () {
   // URL Accordion Anchors //
   ///////////////////////////
 
-  if(window.location.hash !== '') {
+  if(window.location.hash !== '' && $(window.location.hash).length !== 0) {
     var $element = $(window.location.hash);
     $("#accordion .in").removeClass("in");
     var $parents = $element.parents('.panel-collapse');
@@ -221,4 +221,9 @@ $(document).ready(function () {
     $element.addClass('in');
     $('html,body').animate({scrollTop: $element.offset().top}, 'fast');
   }
+
+  $('[data-toggle="collapse"]').click(function() {
+    var $this = $(this);
+    window.location.hash = $this.attr('href');
+  });
 });
