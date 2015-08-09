@@ -38,6 +38,10 @@ module RocketDocs
       Documentation.new(version_name, Hash[fake_controlers])
     end
 
+    def title
+      @title || 'RocketDocs'
+    end
+
     def format_string(string)
       return unless string
       CGI.escapeHTML(string).gsub("\n", '<br>').html_safe
