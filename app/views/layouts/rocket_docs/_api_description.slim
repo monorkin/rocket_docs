@@ -4,7 +4,7 @@
       .panel-heading
         h4.panel-title
           = link_to 'Description', "#rocket_docs_documentation_description", data: { toggle: 'collapse' }
-      .panel-collapse.collapse id='rocket_docs_documentation_description'
+      .panel-collapse.collapse id='rocket_docs_documentation_description' class="#{'in' if RocketDocs.always_display_description}"
         .panel-body
           .panel-group id="rocket_docs_documentation_description_accordion"
             = RocketDocs.format_string(RocketDocs.description)

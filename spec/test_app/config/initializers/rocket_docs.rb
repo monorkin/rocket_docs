@@ -16,4 +16,5 @@ EOF
 RocketDocs.config do |docs|
   docs.title = 'Initializer test'
   docs.description = description
+  docs.always_display_description = true
 end

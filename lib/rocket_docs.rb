@@ -10,6 +10,7 @@ module RocketDocs
     attr_accessor :url
     attr_accessor :title
     attr_accessor :description
+    attr_accessor :always_display_description
 
     def config(&block)
       block.call(self)
