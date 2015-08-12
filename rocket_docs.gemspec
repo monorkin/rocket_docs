@@ -26,6 +26,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails'
   s.add_dependency 'bootstrap-sass'
   s.add_dependency 'indentation-parser'
+  s.add_dependency 'handlebars_assets'
+  s.add_dependency 'underscore-rails'
+  s.add_dependency 'animate-rails'
 
   s.add_development_dependency 'rspec-rails',         '~> 3.2'
   s.add_development_dependency 'factory_girl_rails',  '~> 4.5'

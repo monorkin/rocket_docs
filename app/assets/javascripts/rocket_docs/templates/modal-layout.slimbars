@@ -1,0 +1,32 @@
+main.container
+  section.url
+    h2 URL
+    .col-xs-12
+      h3
+        |{{url}}
+
+  |{{#params}}
+  section.params
+    h3 PARAMS
+    .col-xs-12
+      |{{params}}
+  |{{/params}}
+
+  section.headers
+    h3 HEADERS
+    .col-xs-12
+      |{{{headers}}}
+    .col-xs-12
+      button.btn.btn-primary.add-header
+        i.fa.fa-plus
+        |Add header
+
+  |{{#responsePreview}}
+  section.response-preview
+    h3 RESPONSE PREVIEW
+    .col-xs-12
+      |{{responsePreview}}
+  |{{/responsePreview}}
+
+  |{{content}}
+  section.response

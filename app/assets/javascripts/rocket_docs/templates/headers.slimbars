@@ -1,0 +1,9 @@
+table.table.table-striped.headers
+  thead
+    tr
+      th Key
+      th Value
+  tbody
+    |{{#headers}}
+    |{{> _header-row}}
+    |{{/headers}}

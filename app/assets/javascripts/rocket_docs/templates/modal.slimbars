@@ -1,0 +1,5 @@
+.animated-modal class="{{klass}}"
+  .close-animated-modal
+    img src="/assets/rocket_docs/close_btn.svg" alt="Close button"
+  .modal-content
+    | {{{content}}}

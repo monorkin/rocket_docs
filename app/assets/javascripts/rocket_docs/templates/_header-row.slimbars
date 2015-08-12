@@ -1,0 +1,5 @@
+tr
+  td contenteditable="true"
+    | {{key}}
+  td contenteditable="true"
+    | {{value}}

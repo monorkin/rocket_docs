@@ -3,6 +3,9 @@ module RocketDocs
     isolate_namespace RocketDocs
     require 'jquery-rails'
     require 'bootstrap-sass'
+    require 'animate-rails'
+    require 'handlebars_assets'
+    require 'underscore-rails'
 
     config.generators do |g|
       g.test_framework :rspec

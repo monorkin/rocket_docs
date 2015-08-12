@@ -1,0 +1,53 @@
+.animated-modal {
+  $method-get-color: #427fff;
+  $method-post-color: #f4934c;
+  $method-put-color: #fbce43;
+  $method-delete-color: #f65757;
+
+  $method-get-text-color: #fff;
+  $method-post-text-color: #fff;
+  $method-put-text-color: #fff;
+  $method-delete-text-color: #fff;
+
+  &.method-get {
+    background-color: $method-get-color;
+    color: $method-get-text-color;
+  }
+
+  &.method-post {
+    background-color: $method-post-color;
+    color: $method-post-text-color;
+  }
+
+  &.method-put {
+    background-color: $method-put-color;
+    color: $method-put-text-color;
+  }
+
+  &.method-delete {
+    background-color: $method-delete-color;
+    color: $method-delete-text-color;
+  }
+
+  .close-animated-modal {
+    $padding: 25px;
+
+    padding-top: $padding;
+    padding-bottom: $padding;
+    text-align: center;
+
+    img {
+      @include transition(transform 0.2s);
+      &:hover {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .modal-content {
+    // color: $primary-text;
+    box-shadow: none;
+    background: transparent;
+    border: 0 solid transparent;
+  }
+}
