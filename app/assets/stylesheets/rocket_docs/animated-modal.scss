@@ -1,32 +1,95 @@
 .animated-modal {
-  $method-get-color: #427fff;
-  $method-post-color: #f4934c;
-  $method-put-color: #fbce43;
-  $method-delete-color: #f65757;
+  @mixin striped-table($even-bg, $even-text, $odd-bg, $odd-text) {
+    table {
+      &.table-striped {
+        thead {
+          th {
+            background-color: $even-bg;
+            border-color: $even-text;
+            border-width: 6px;
+            color: $even-text;
+          }
+        }
 
-  $method-get-text-color: #fff;
-  $method-post-text-color: #fff;
-  $method-put-text-color: #fff;
-  $method-delete-text-color: #fff;
+        tbody {
+          tr {
+            &:nth-child(even) {
+              background-color: $even-bg;
+              color: $even-text;
+            }
+
+            &:nth-child(odd) {
+              background-color: $odd-bg;
+              color: $odd-text;
+            }
+          }
+        }
+      }
+    }
+  }
 
   &.method-get {
     background-color: $method-get-color;
     color: $method-get-text-color;
+
+    input {
+      color: $method-get-text-color;
+    }
+
+    @include striped-table(
+      $method-get-text-color,
+      $method-get-color,
+      lighten($method-get-color, 10%),
+      $method-get-text-color
+    );
   }
 
   &.method-post {
     background-color: $method-post-color;
     color: $method-post-text-color;
+
+    input {
+      color: $method-post-text-color;
+    }
+
+    @include striped-table(
+      $method-post-text-color,
+      $method-post-color,
+      lighten($method-post-color, 10%),
+      $method-post-text-color
+    );
   }
 
-  &.method-put {
+  &.method-put, &.method-patch {
     background-color: $method-put-color;
     color: $method-put-text-color;
+
+    input {
+      color: $method-put-text-color;
+    }
+
+    @include striped-table(
+      $method-put-text-color,
+      $method-put-color,
+      lighten($method-put-color, 10%),
+      $method-put-text-color
+    );
   }
 
   &.method-delete {
     background-color: $method-delete-color;
     color: $method-delete-text-color;
+
+    input {
+      color: $method-delete-text-color;
+    }
+
+    @include striped-table(
+      $method-delete-text-color,
+      $method-delete-color,
+      lighten($method-delete-color, 10%),
+      $method-delete-text-color
+    );
   }
 
   .close-animated-modal {

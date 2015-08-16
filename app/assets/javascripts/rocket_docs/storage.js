@@ -36,22 +36,40 @@ var Storage = {
   get: function(key) {
     var store = this.storage();
     if (store === localStorage) {
-      return store.getItem(key);
+      return JSON.parse(store.getItem(key));
     } else {
       return store[key];
     }
   },
 
   set: function(key, value) {
-    if (!key || !value) {
-      return null;
-    }
+    if (!key || !value) return;
+
+    var store = this.storage();
 
     if (store === localStorage) {
-      store.setItem(key, value);
+      try {
+        store.setItem(key, JSON.stringify(value));
+      } catch(e) {
+        return null;
+      }
     } else {
       store[key] = value;
     }
     return value;
+  },
+
+  remove: function(key) {
+    if (!key) return;
+
+    var store = this.storage();
+
+    if (store === localStorage) {
+      store.removeItem(key);
+    } else {
+      delete(store[key]);
+    }
+
+    return true;
   }
 };

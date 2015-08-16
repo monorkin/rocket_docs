@@ -1,5 +1,10 @@
 tr
-  td contenteditable="true"
-    | {{key}}
-  td contenteditable="true"
-    | {{value}}
+  td contenteditable="true" data-previous-value="{{key}}" data-type="key"
+    |{{key}}
+  td contenteditable="true" data-previous-value="{{value}}" data-type="value"
+    |{{value}}
+  td
+    .pull-right
+      button.btn.btn-danger.btn-xs.delete-header
+        i.fa.fa-trash-o
+        |  Delete

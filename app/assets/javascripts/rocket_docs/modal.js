@@ -3,47 +3,89 @@ var Modal = {
     return HandlebarsTemplates.modal(options);
   },
 
-  methodGet: function(options) {
-    return this.skeletonLayout(options);
-  },
-
-  methodOther: function(options) {
-    return this.skeletonLayout(options);
-  },
-
-  skeletonLayout: function(options) {
-    options.headers = this.headers();
+  layout: function(options) {
+    options.params = this.paramsList(options.params || {});
+    options.urlParams = this.urlParamsList(options.url);
     return HandlebarsTemplates['modal-layout'](options);
   },
 
-  headers: function(prefix) {
-    prefix = prefix || '';
+  urlParamsList: function(url) {
+    var params = this.urlParams(url);
 
-    var defaultHeaders = {};
-    if(typeof(Storage) !== "undefined") {
-      //TODO use localStorage.get/set
-      defaultHeaders = localStorage.getItem(defaultHeaders) || {};
-    }
+    if (!params) return;
 
-    var savedHeaders = {};
-    if(typeof(Storage) !== "undefined") {
-      //TODO napravi adpter funkciju za prefixiranje
-      savedHeaders = localStorage.getItem(prefix + '_savedHeaders') || {};
-    }
+    return HandlebarsTemplates['url-params-list']({
+      params: params
+    });
+  },
 
-    var headers = [];
-    $.each(
-      $.extend(defaultHeaders, savedHeaders),
-      function(key, value) {
-        headers.push(
+  urlParams: function(url) {
+    var params = url.match(/\{[^\}]+\}/gi);
+
+    if (!params || params.length === 0) return;
+
+    var cleanParams = [];
+
+    $.each(params, function (i, param) {
+      cleanParams.push(
+        {
+          key: param.substring(1, param.length - 1)
+        }
+      );
+    });
+
+    return cleanParams;
+  },
+
+  paramsList: function(params) {
+    if (Object.keys(params).length === 0) return null;
+
+    var structuredParams = this.buildStructuredParams(params);
+
+    return HandlebarsTemplates['params-list']({
+      params: structuredParams
+    });
+  },
+
+  buildStructuredParams: function(params) {
+    if (Object.keys(params).length === 0) return null;
+
+    structuredParams = [];
+
+    $.each(params, function(key, value) {
+      if (typeof(value) !== 'object') {
+        structuredParams.push(
           {
             key: key,
-            value: value || ''
+            type: value
           }
         );
+      } else {
+        Modal.expandStructuredParams(structuredParams, value, key);
       }
-    );
+    });
 
-    return HandlebarsTemplates.headers(headers);
+    return structuredParams;
+  },
+
+  expandStructuredParams: function(structuredParams, params, name) {
+    if (Object.keys(params).length === 0) return;
+
+    $.each(params, function(key, value) {
+      if (typeof(value) !== 'object') {
+        structuredParams.push(
+          {
+            key: name + '[' + key + ']',
+            type: value
+          }
+        );
+      } else {
+        Modal.expandStructuredParams(
+          structuredParams,
+          value,
+          name + '[' + key + ']'
+        );
+      }
+    });
   }
 };

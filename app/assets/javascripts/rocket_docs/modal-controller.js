@@ -34,6 +34,8 @@ ModalControler.prototype.show = function(options) {
   }
 
   this.attachHeaderListener();
+  this.attachUrlParamsListeners();
+
   this.$modal.animatedModal('show', options);
 };
 
@@ -49,17 +51,7 @@ ModalControler.prototype.appendModal = function(options) {
 };
 
 ModalControler.prototype.viewForData = function() {
-  if (this.method.toLowerCase() === 'get') {
-    return Modal.methodGet(
-      {
-        headers: this.headers.headersTableHTML(),
-        url: this.url,
-        params: this.params,
-        responsePreview: this.responsePreview
-      }
-    );
-  }
-  return Modal.methodOther(
+  var modalHtml = Modal.layout(
     {
       klass: 'method-' + this.method.toLowerCase(),
       headers: this.headers.headersTableHTML(),
@@ -68,13 +60,61 @@ ModalControler.prototype.viewForData = function() {
       responsePreview: this.responsePreview
     }
   );
+  
+  return modalHtml;
 };
 
 ModalControler.prototype.attachHeaderListener = function() {
   if (!this.$modal) return;
 
-  $headersTable = this.$headersTable = this.$headersTable || this.$modal.find('table.headers');
-  $addHeaderBtn = this.$addHeaderBtn = this.$addHeaderBtn || this.$modal.find('button.add-header');
+  this.$headersTable = this.$headersTable || this.$modal.find('table.headers');
+  this.$addHeaderBtn = this.$addHeaderBtn || this.$modal.find('button.add-header');
 
-  this.headers.attachHeaderListener($headersTable, $addHeaderBtn);
+  this.headers.attachHeaderListener(this.$headersTable, this.$addHeaderBtn);
+};
+
+ModalControler.prototype.attachUrlParamsListeners = function() {
+  if (!this.$modal) return;
+
+  this.$urlParamsTable = this.$urlParamsTable || this.$modal.find('table.url-params');
+  this.$urlInputField = this.$urlInputField || this.$modal.find('input.url-input');
+
+  var params = {};
+
+  $.each(this.$urlParamsTable.find('[contenteditable][data-key]'), function(i, object) {
+    var $object = $(object);
+    if ($object.val() && $object.val().length !== 0) {
+      params[$object.data('key')] = $object.val();
+    }
+  });
+
+  this.$urlInputField.data('params', params);
+
+  var $urlInputField = this.$urlInputField;
+  var updateUrlWithUrlParams = this.updateUrlWithUrlParams;
+
+  this.$urlParamsTable.on('keyup', '[contenteditable][data-key]', function() {
+    var $this = $(this);
+
+    var tempParams = $urlInputField.data('params');
+    tempParams[$this.data('key')] = $this.text();
+    $urlInputField.data('params', tempParams);
+
+    updateUrlWithUrlParams($urlInputField);
+  });
+
+  this.updateUrlWithUrlParams();
+};
+
+ModalControler.prototype.updateUrlWithUrlParams = function($urlInputField) {
+  if (!$urlInputField) return;
+
+  var url = $urlInputField.data('url');
+  var params = $urlInputField.data('params');
+
+  $.each(params, function(key, value) {
+    url = url.replace('{' + key + '}', value);
+  });
+
+  $urlInputField.val(url);
 };

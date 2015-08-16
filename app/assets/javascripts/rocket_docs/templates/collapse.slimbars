@@ -1,0 +1,9 @@
+.panel-group id="{{groupId}}"
+  .panel.panel-default
+    .panel-heading
+      h4.panel-title
+        a data-toggle="collapse" href="\#{{id}}"
+          |{{title}}
+    .panel-collapse.collapse id='{{id}}'
+      .panel-body
+        |{{{content}}}

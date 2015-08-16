@@ -1,6 +1,8 @@
 //= require animate
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+@import './colors';
+@import './bootstrap-theme';
 @import './animated-modal';
 
 body {
@@ -13,13 +15,16 @@ body {
   -o-animation: spin 2s infinite linear;
   animation: spin 2s infinite linear;
 }
+
 @keyframes spin {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(359deg);
     transform: rotate(359deg);
   }
+}
+
+[contentEditable=true]:empty:not(:focus):before{
+  content:attr(data-placeholder-text);
 }

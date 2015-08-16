@@ -3,6 +3,7 @@ table.table.table-striped.headers
     tr
       th Key
       th Value
+      th
   tbody
     |{{#headers}}
     |{{> _header-row}}

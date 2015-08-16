@@ -1,0 +1,12 @@
+table.table.table-striped.url-params
+  thead
+    tr
+      th Key
+      th Value
+  tbody
+    |{{#params}}
+    tr
+      td
+        |{{key}}
+      td contenteditable="true" data-key="{{key}}" data-placeholder-text="Enter param value here"
+    |{{/params}}

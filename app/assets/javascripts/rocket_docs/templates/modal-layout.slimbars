@@ -1,19 +1,33 @@
 main.container
   section.url
-    h2 URL
     .col-xs-12
-      h3
+      .row
+        h3 URL
+    |{{#if urlParams}}
+    .col-xs-12
+      .form-group
+        input.form-control.url-input data-url="{{url}}" value="{{url}}"
+    .col-xs-12
+      |{{{urlParams}}}
+    |{{else}}
+    .col-xs-12
+      h4 data-url="{{url}}"
         |{{url}}
+    |{{/if}}
 
-  |{{#params}}
+  |{{#if params}}
   section.params
-    h3 PARAMS
     .col-xs-12
-      |{{params}}
-  |{{/params}}
+      .row
+        h3 PARAMS
+    .col-xs-12
+      |{{{params}}}
+  |{{/if}}
 
   section.headers
-    h3 HEADERS
+    .col-xs-12
+      .row
+        h3 HEADERS
     .col-xs-12
       |{{{headers}}}
     .col-xs-12
@@ -21,12 +35,23 @@ main.container
         i.fa.fa-plus
         |Add header
 
-  |{{#responsePreview}}
+  |{{#if responsePreview}}
   section.response-preview
-    h3 RESPONSE PREVIEW
+    .col-xs-12
+      .row
+        h3 RESPONSE PREVIEW
     .col-xs-12
       |{{responsePreview}}
-  |{{/responsePreview}}
+  |{{/if}}
 
-  |{{content}}
   section.response
+    .col-xs-12
+      .row
+        h3 RESPONSE
+    .col-xs-12
+      button.btn.btn-primary.add-header
+        i.fa.fa-paper-plane-o
+        |Send
+    .col-xs-12
+      pre.response
+        |Patka

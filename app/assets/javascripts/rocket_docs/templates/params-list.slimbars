@@ -1,0 +1,9 @@
+table.table.table-striped.params
+  thead
+    tr
+      th Key
+      th Type
+  tbody
+    |{{#params}}
+    |{{> _params-row}}
+    |{{/params}}
