@@ -1,17 +1,16 @@
-- if defined?(rocket_docs)
-  .navbar.navbar-default.navbar-fixed-top
-    .container-fluid
-      .navbar-header
-        button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#version-nav" aria-expanded="false"
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        = link_to RocketDocs.title, rocket_docs.root_path, class: 'navbar-brand'
-      .collapse.navbar-collapse#version-nav
-        ul.nav.navbar-nav
-          li class="#{'active' if params[:version].nil?}"
-            = link_to 'All versions', rocket_docs.root_path
-          - RocketDocs::Router.versions.each do |version|
-            li class="#{'active' if params[:version] == version.to_s}"
-              = link_to version.to_s, rocket_docs.version_path(version: version)
+.navbar.navbar-default.navbar-fixed-top
+  .container-fluid
+    .navbar-header
+      button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#version-nav" aria-expanded="false"
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      = link_to RocketDocs.title, root_path, class: 'navbar-brand'
+    .collapse.navbar-collapse#version-nav
+      ul.nav.navbar-nav
+        li class="#{'active' if params[:version].nil?}"
+          = link_to 'All versions', root_path
+        - RocketDocs::Router.versions.each do |version|
+          li class="#{'active' if params[:version] == version.to_s}"
+            = link_to version.to_s, version_path(version: version)
