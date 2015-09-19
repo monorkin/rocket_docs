@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = 'rocket_docs'
   s.version     = RocketDocs::VERSION
   s.authors     = ['Stanko Krtalić Rusendić']
-  s.email       = ['stanko.krtalic@gmial.com']
+  s.email       = ['stanko.krtalic@gmail.com']
   s.homepage    = 'http://github.com/stankec/Rocket_Docs'
   s.summary     = 'Interactive API documentation for rails apps'
   s.description = 'Unintrusive interactive API documentation '\

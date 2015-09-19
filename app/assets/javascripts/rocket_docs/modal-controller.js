@@ -31,6 +31,8 @@ ModalControler.prototype.show = function(options) {
       klass: 'method-' + this.method.toLowerCase(),
       content: this.viewForData()
     });
+  } else {
+    this.$modal.find('.modal-content').html(this.viewForData());
   }
 
   this.attachHeaderListener();
@@ -60,7 +62,7 @@ ModalControler.prototype.viewForData = function() {
       responsePreview: this.responsePreview
     }
   );
-  
+
   return modalHtml;
 };
 

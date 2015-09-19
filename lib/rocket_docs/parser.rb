@@ -24,12 +24,12 @@ module RocketDocs
         http_keywords + parser_keywords
       end
 
-      def http_keywords
-        %w(GET POST PUT PATCH DELETE)
-      end
-
       def parser_keywords
         string_keywords + hash_keywords
+      end
+
+      def http_keywords
+        %w(GET POST PUT PATCH DELETE)
       end
 
       private
@@ -43,17 +43,18 @@ module RocketDocs
       end
 
       def indentation_parser
-        IndentationParser.new do |p|
-          indentation_parser_default(p)
-          indentation_parser_leafs(p)
+        IndentationParser.new do |parser|
+          indentation_parser_default(parser)
+          indentation_parser_leafs(parser)
         end
       end
 
-      def indentation_parser_default(p)
-        p.default do |parent, source|
+      def indentation_parser_default(parser)
+        parser.default do |parent, source|
           parent ||= {}
           words = source.split
           keyword, key = words.first.upcase, words.first
+
           if words.count == 1 && keywords.include?(keyword)
             parent[keyword] = string_keywords.include?(keyword) ? '' : {}
           elsif words.count == 1 && parent.is_a?(Hash)
@@ -62,21 +63,22 @@ module RocketDocs
         end
       end
 
-      def indentation_parser_leafs(p)
-        p.on_leaf do |parent, source|
+      def indentation_parser_leafs(parser)
+        parser.on_leaf do |parent, source|
           case parent
           when String
             parent << "\n" if parent.length != 0
             parent << source.try(:strip) || ''
           when Hash
-            k, v = source.split(':', 2)
-            parent[k] = v ? v.try(:strip) : {}
+            key, value = source.split(':', 2)
+            parent[key] = value ? value.try(:strip) : {}
           end
         end
       end
 
       def extract_method_comment(line, comments = {}, temp_comment = [])
         return true unless valid_line?(line)
+
         if line =~ /^\s*def\s+\w+$/
           comments[method_name(line)] = temp_comment.join("\n")
           true
@@ -95,9 +97,10 @@ module RocketDocs
       end
 
       def clean_comments(comments)
-        comments.each do |k, v|
-          comments[k] = v.gsub(/^\s*#\s?/, '').gsub(/\n+/, "\n")
+        comments.each do |method, comment|
+          comments[method] = comment.gsub(/^\s*#\s?/, '').gsub(/\n+/, "\n")
         end
+
         comments
       end
     end

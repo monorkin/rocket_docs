@@ -33,6 +33,11 @@ $(document).ready(function() {
      $httpHeadersCollapse
    );
 
+   defaultHttpHeaders.attachHeaderListener(
+     $httpHeadersCollapse.find('table.headers'),
+     $httpHeadersCollapse.find('.add-header')
+   );
+
   /*
    * Toggle try-out-modal
    */

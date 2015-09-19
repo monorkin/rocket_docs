@@ -77,7 +77,7 @@ RSpec.describe RocketDocs::Router do
 
   describe '#api_controller_paths' do
     it 'returns the file path to all api controllers' do
-      root = File.expand_path('..', __FILE__)
+      root = File.expand_path('../..', __FILE__)
       expected_result = [
         '/test_app/app/controllers/api/v1/people_controller.rb',
         '/test_app/app/controllers/api/v2/posts_controller.rb',

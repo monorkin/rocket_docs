@@ -5,42 +5,27 @@ module RocketDocs
   class Documentation
     attr_reader :version
     attr_reader :controllers
+    attr_reader :controllers_in
 
     def initialize(version, controllers_hash)
       @version = version
       @controllers = []
-      @controllers_in = controllers_hash
-      generate
-    end
+      @controllers_in = controllers_hash || []
 
-    def should_update?
-      should_update = false
-      controllers.each { |c| should_update ||= c.should_update? }
-      should_update
-    end
-
-    def update
-      controllers.each(&:update)
-      self
-    end
-
-    def update!
-      controllers.each(&:update!)
-      self
+      generate!
     end
 
     private
 
-    def generate
+    def generate!
       build_controllers
-      update
     end
 
     def build_controllers
-      @controllers = []
-      @controllers_in ||= []
-      @controllers_in.each do |n, v|
-        @controllers << Controller.new(n, v[:path], v[:actions], self)
+      controllers_in.each do |name, values|
+        @controllers << Controller.new(
+          name, values[:path], values[:actions], self
+        )
       end
     end
   end

@@ -51,12 +51,6 @@ RSpec.describe RocketDocs::Documentation::Action do
     end
   end
 
-  describe '#default_method' do
-    it 'returns the default method the action responds to' do
-      expect(action.default_method).to eq 'POST'
-    end
-  end
-
   describe '#methods' do
     it 'returns the methods to which the action responds to' do
       expect(action.methods.to_set).to eq %w(POST).to_set

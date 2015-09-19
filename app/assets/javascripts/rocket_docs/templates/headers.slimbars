@@ -1,10 +1,16 @@
-table.table.table-striped.headers
-  thead
-    tr
-      th Key
-      th Value
-      th
-  tbody
-    |{{#headers}}
-    |{{> _header-row}}
-    |{{/headers}}
+.col-xs-12
+  table.table.table-striped.headers
+    thead
+      tr
+        th Key
+        th Value
+        th
+    tbody
+      |{{#headers}}
+      |{{> _header-row}}
+      |{{/headers}}
+
+.col-xs-12
+  button.btn.btn-primary.add-header
+    i.fa.fa-plus
+    |Add header

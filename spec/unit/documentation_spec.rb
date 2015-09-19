@@ -11,16 +11,4 @@ RSpec.describe RocketDocs::Documentation do
       expect(doc.controllers.map(&:name)).to eq %w(People)
     end
   end
-
-  describe '#should_update?' do
-    # TODO: Figure out how to test this
-  end
-
-  describe '#update' do
-    # TODO: Figure out how to test this
-  end
-
-  describe '#update!' do
-    # TODO: Figure out how to test this
-  end
 end
