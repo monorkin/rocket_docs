@@ -24,12 +24,16 @@ Example:
 gem 'rocket_docs'
 ```
 
+### If you are using RocketPants
+
 If you are using [rocket_pants](https://github.com/Sutto/rocket_pants) you only have to mount the engine in your routes file.
 
 ```Ruby
 # In your config/routes.rb
 mount RocketDocs::Engine => '/api-doc'
 ```
+
+### If you are __NOT__ using RocketPants
 
 The gem also adds two new rake tasks for generating documentation as static html or markdown files
 
