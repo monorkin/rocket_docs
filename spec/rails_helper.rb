@@ -3,7 +3,9 @@ require 'spec_helper'
 require File.expand_path("../test_app/config/environment", __FILE__)
 require 'rspec/rails'
 
-ActiveRecord::Migration.maintain_test_schema!
+if Rails::VERSION::STRING >= '4.1.8'
+  ActiveRecord::Migration.maintain_test_schema!
+end
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
