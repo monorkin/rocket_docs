@@ -21,4 +21,3 @@ load 'rails/tasks/engine.rake'
 Bundler::GemHelper.install_tasks
 
 RSpec::Core::RakeTask.new(:spec)
-task default: :appraisal if !ENV['APPRAISAL_INITIALIZED'] && !ENV['TRAVIS']
