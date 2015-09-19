@@ -53,26 +53,36 @@ module RocketDocs
         parser.default do |parent, source|
           parent ||= {}
           words = source.split
-          keyword, key = words.first.upcase, words.first
 
-          if words.count == 1 && keywords.include?(keyword)
-            parent[keyword] = string_keywords.include?(keyword) ? '' : {}
-          elsif words.count == 1 && parent.is_a?(Hash)
-            parent[key] = {}
-          end
+          build_parser_default_node(parent, words)
         end
       end
 
       def indentation_parser_leafs(parser)
         parser.on_leaf do |parent, source|
-          case parent
-          when String
-            parent << "\n" if parent.length != 0
-            parent << source.try(:strip) || ''
-          when Hash
-            key, value = source.split(':', 2)
-            parent[key] = value ? value.try(:strip) : {}
-          end
+          build_parser_leaf_node(parent, source)
+        end
+      end
+
+      def build_parser_default_node(parent, words)
+        key = words.first
+        keyword = key.upcase
+
+        if words.count == 1 && keywords.include?(keyword)
+          parent[keyword] = string_keywords.include?(keyword) ? '' : {}
+        elsif words.count == 1 && parent.is_a?(Hash)
+          parent[key] = {}
+        end
+      end
+
+      def build_parser_leaf_node(parent, source)
+        case parent
+        when String
+          parent << "\n" if parent.length != 0
+          parent << source.try(:strip) || ''
+        when Hash
+          key, value = source.split(':', 2)
+          parent[key] = value ? value.try(:strip) : {}
         end
       end
 
