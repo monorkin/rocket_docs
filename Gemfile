@@ -8,3 +8,5 @@ gem 'rails', "~> #{rails_version}"
 gem 'rspec-rails', '~> 3.2'
 gem 'factory_girl_rails', '~> 4.5'
 gem 'better_errors', '~> 2.1', platforms: :mingw_20
+gem 'simplecov', '0.9.1'
+gem 'codeclimate-test-reporter', require: false
