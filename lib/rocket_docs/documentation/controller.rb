@@ -1,19 +1,18 @@
 module RocketDocs
   class Documentation
     class Controller
-      attr_accessor :name
-      attr_accessor :file
+      attr_reader :name
+      attr_reader :file
       attr_reader :documentation
       attr_reader :actions
 
       alias_method :full_name, :name
 
       def initialize(name, file, actions_hash, documentation)
-        @file_md5  = ''
         @actions = []
         @actions_in = actions_hash
-        self.name = name
-        self.file = file
+        @name = name
+        @file = file
         @documentation = documentation
 
         generate!

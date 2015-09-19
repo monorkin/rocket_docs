@@ -68,9 +68,11 @@ module RocketDocs
         key = words.first
         keyword = key.upcase
 
-        if words.count == 1 && keywords.include?(keyword)
+        return unless words.count == 1
+
+        if keywords.include?(keyword)
           parent[keyword] = string_keywords.include?(keyword) ? '' : {}
-        elsif words.count == 1 && parent.is_a?(Hash)
+        elsif parent.is_a?(Hash)
           parent[key] = {}
         end
       end

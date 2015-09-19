@@ -5,10 +5,13 @@ require 'rocket_docs/router'
 require 'rocket_docs/parser'
 require 'rocket_docs/documentation'
 
+ require 'pry'
+
 module RocketDocs
   class << self
     attr_accessor :url
     attr_accessor :title
+    attr_accessor :examples_folder
     attr_accessor :description
     attr_accessor :always_display_description
 
@@ -41,6 +44,10 @@ module RocketDocs
 
     def title
       @title || 'RocketDocs'
+    end
+
+    def examples_folder
+      @examples_folder || 'documentation/examples'
     end
 
     def format_string(string)

@@ -16,6 +16,7 @@ module RocketDocs
         @params = params
         @params.delete(:version) if params
         @params = @params.presence
+        @example_file = nil
 
         generate!
       end
@@ -42,9 +43,25 @@ module RocketDocs
         end
       end
 
+      def example(method = default_method)
+        files = Dir.glob("#{example_file(method)}*")
+        file = files.min_by(&:length)
+        file && File.read(file)
+      end
+
       private
 
       attr_reader :documentation
+      attr_reader :example_file
+
+      def example_file(method)
+        Rails.root.join(
+          RocketDocs.examples_folder,
+          controller.documentation.version,
+          controller.name.parameterize('_'),
+          "#{method}-#{name}"
+        )
+      end
 
       def default_method
         methods.first || 'GET'
