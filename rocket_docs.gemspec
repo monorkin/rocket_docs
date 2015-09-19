@@ -1,4 +1,4 @@
-$:.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 
 # Maintain your gem's version:
 require 'rocket_docs/version'
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     '{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc'
   ]
 
-  s.add_dependency 'rails'
+  s.add_dependency 'rails', '>= 3.2.0'
   s.add_dependency 'slim-rails'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'uglifier'
