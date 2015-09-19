@@ -35,8 +35,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rocket_pants',        '~> 1.10'
   s.add_development_dependency 'pry',                 '~> 0.10'
   s.add_development_dependency 'pry-rails',           '~> 0.3'
-  s.add_development_dependency 'better_errors',       '~> 2.1',
-                               platforms: [:mri_20]
+  if RUBY_VERSION.split('.').first == '2'
+    s.add_development_dependency 'better_errors',     '~> 2.1'
+  end
   s.add_development_dependency 'binding_of_caller',   '~> 0.7'
   s.add_development_dependency 'sqlite3',             '~> 1.3'
 end
