@@ -30,9 +30,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'underscore-rails'
   s.add_dependency 'animate-rails'
 
-  s.add_development_dependency 'sqlite3',             '~> 1.3'
+  s.add_development_dependency 'rocket_pants',        '~> 1.10'
   s.add_development_dependency 'binding_of_caller',   '~> 0.7'
   s.add_development_dependency 'pry',                 '~> 0.10'
   s.add_development_dependency 'pry-rails',           '~> 0.3'
-  s.add_development_dependency 'rocket_pants',        '~> 1.10'
 end
