@@ -3,6 +3,25 @@
 [![Code Climate](https://codeclimate.com/github/Stankec/Rocket_Docs/badges/gpa.svg)](https://codeclimate.com/github/Stankec/Rocket_Docs)
 [![Test Coverage](https://codeclimate.com/github/Stankec/Rocket_Docs/badges/coverage.svg)](https://codeclimate.com/github/Stankec/Rocket_Docs)
 
+Table of contents:
+
+1. [About](#about)
+2. [Installation](#installation)
+  1. [With RocketPants](#if-you-are-using-rocketpants)
+  2. [With Rake](#if-you-are-not-using-rocketpants)
+3. [Configuration](#configuration)
+4. [Usage](#usage)
+  1. [Keywords](#keywords)
+    1. [DOC](#doc)
+    2. [PARAMS](#params)
+    3. [URL](#url)
+    4. [GET, PUT, POST, PATCH, DELETE](#get-put-post-patch-delete)
+  2. [Examples](#examples)
+  3. [Rake task](#rake-task)
+  4. [Differences between engine and rake task use](#difference-between-the-engine-and-the-rake-tasks)
+5. [Contributing](#contributing)
+6. [License](#license)
+
 # About
 
 RocketDocs is a automatic documentation generator for APIs.
@@ -102,6 +121,8 @@ There are a few keywords to help you: `DOC`, `PARAMS`, `URL`, `GET`, `PUT`, `POS
 
 It doesn't matter if the words are lower or upper case.
 
+#### DOC
+
 `DOC` is used to define documentation, text that describes the action.
 
 Example:
@@ -114,6 +135,8 @@ def index
   ...
 end
 ```
+
+#### PARAMS
 
 `PARAMS` is used to define which parameters the action accepts.
 If you are using rocket_pants this will be automatically populated.
@@ -136,6 +159,8 @@ def show
 end
 ```
 
+#### URL
+
 `URL` is used to define an action's URL. Parameters should be surounded by curly braces. If you are using rocket_pants this will be automatically populated.
 
 Example:
@@ -152,6 +177,7 @@ def show
   ...
 end
 ```
+#### GET, PUT, POST, PATCH, DELETE
 
 `GET`, `PUT`, `POST`, `PATCH`, `DELETE` are used to define method specifics.
 
