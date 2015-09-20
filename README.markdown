@@ -250,11 +250,15 @@ _Note: If no new value was defined in a method specific block then the default w
 
 # Contributing
 
-If you feel like helping, feel free to fork this project and issue a pull request. There are many things that need to be done. Here's just a few:
+If you want to help this project out please fell free to:
 
-1. Better specs
-2. Caching
+1. Fork this repo
+2. Make changes
+3. Write tests
+4. Issue a pull request with an explanation
+
+Or open an issue [here](https://github.com/Stankec/rocket_docs/issues).
 
 # License
 
-This project rocks and uses MIT-LICENSE.
+This project rocks and uses [MIT-LICENSE](https://github.com/Stankec/rocket_docs/blob/master/LICENSE).
