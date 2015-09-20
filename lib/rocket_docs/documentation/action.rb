@@ -32,7 +32,7 @@ module RocketDocs
       end
 
       def params(method = default_method)
-        documentation_attribute_for_method('PARAMS', method) || params
+        documentation_attribute_for_method('PARAMS', method) || @params
       end
 
       def methods
