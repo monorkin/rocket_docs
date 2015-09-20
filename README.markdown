@@ -61,20 +61,7 @@ It's important to note that only methods that are accessible (are used in the ro
 
 To change the title or description of the generated API you can ether use an initializer or the engine setup method.
 
-Engine setup:
-
-```Ruby
-# In your config/routes.rb
-mount (
-  RocketDocs::Engine.setup do |docs|
-    docs.url = '/api-doc'
-    docs.title = 'Custom API title'
-    docs.description = 'Custom API description'
-  end
-)
-```
-
-Initializer:
+__Initializer:__
 
 A `config/initializers/rocket_docs.rb` has to be created!
 
@@ -87,6 +74,19 @@ RocketDocs.config do |docs|
   docs.title = 'Custom API title'
   docs.description = 'Custom API description'
 end
+```
+
+__Engine setup:__
+
+```Ruby
+# In your config/routes.rb
+mount (
+  RocketDocs::Engine.setup do |docs|
+    docs.url = '/api-doc'
+    docs.title = 'Custom API title'
+    docs.description = 'Custom API description'
+  end
+)
 ```
 
 # Usage
@@ -199,7 +199,7 @@ This would set the `DOC`, `PARAMS` and `URL` values as default values for all me
 
 ### Examples
 
-Currently the best example you can look at is the `test_app` located in the `specs` folder. You can even start the app and experiment a little bit.
+Currently the best example you can look at is the [test_app](https://github.com/Stankec/rocket_docs/tree/master/spec/test_app) located in the `specs` folder. You can even start the app and experiment a little bit.
 
 ### Rake task
 
