@@ -3,7 +3,21 @@
 [![Code Climate](https://codeclimate.com/github/Stankec/Rocket_Docs/badges/gpa.svg)](https://codeclimate.com/github/Stankec/Rocket_Docs)
 [![Test Coverage](https://codeclimate.com/github/Stankec/Rocket_Docs/badges/coverage.svg)](https://codeclimate.com/github/Stankec/Rocket_Docs)
 
-Table of contents:
+# About
+
+RocketDocs is a automatic documentation generator for APIs.
+
+It is intended to be used with :rocket: [rocket_pants](https://github.com/Sutto/rocket_pants) based APIs but it can also be used as a standalone generator through rake tasks.
+
+This project was mostly inspired by the :grapes: [grape-swagger project](https://github.com/tim-vandecasteele/grape-swagger).
+
+All documentation is done in comments so that your code doesn't get littered with code that has no functional purpose, thus making your code more readable.
+
+Example:
+![Before](http://i.imgur.com/sspHnoC.png)
+![After](http://i.imgur.com/nPJ4cey.png)
+
+# Table of contents
 
 1. [About](#about)
 2. [Installation](#installation)
@@ -21,20 +35,6 @@ Table of contents:
   4. [Differences between engine and rake task use](#difference-between-the-engine-and-the-rake-tasks)
 5. [Contributing](#contributing)
 6. [License](#license)
-
-# About
-
-RocketDocs is a automatic documentation generator for APIs.
-
-It is intended to be used with :rocket: [rocket_pants](https://github.com/Sutto/rocket_pants) based APIs but it can also be used as a standalone generator through rake tasks.
-
-This project was mostly inspired by the :grapes: [grape-swagger project](https://github.com/tim-vandecasteele/grape-swagger).
-
-All documentation is done in comments so that your code doesn't get littered with code that has no functional purpose, thus making your code more readable.
-
-Example:
-![Before](http://i.imgur.com/sspHnoC.png)
-![After](http://i.imgur.com/nPJ4cey.png)
 
 # Installation
 
