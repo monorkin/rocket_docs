@@ -16,7 +16,7 @@ Table of contents:
     2. [PARAMS](#params)
     3. [URL](#url)
     4. [GET, PUT, POST, PATCH, DELETE](#get-put-post-patch-delete)
-  2. [Examples](#examples)
+  2. [Code Examples](#code-examples)
   3. [Rake task](#rake-task)
   4. [Differences between engine and rake task use](#difference-between-the-engine-and-the-rake-tasks)
 5. [Contributing](#contributing)
@@ -223,7 +223,7 @@ end
 
 This would set the `DOC`, `PARAMS` and `URL` values as default values for all methods except for `POST` which has it's own `DOC` and `PARAMS` values.
 
-### Examples
+### Code examples
 
 Currently the best example you can look at is the [test_app](https://github.com/Stankec/rocket_docs/tree/master/spec/test_app) located in the `specs` folder. You can even start the app and experiment a little bit.
 
